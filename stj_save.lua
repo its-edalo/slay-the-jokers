@@ -1,6 +1,6 @@
 
 function Game:stj_save()
-    if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.25 then
+    if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
 
         local card_data = {}
@@ -22,20 +22,21 @@ function Game:stj_save()
                         local y = string.format("%.3f", v.T.y)
                         local w = string.format("%.3f", v.T.w)
                         local h = string.format("%.3f", v.T.h)
+                        local p = v:get_popup_direction()
                         local t = v:generate_locvars()
-                        -- local p = v:get_popup_direction()
                         
                         if not t or #t == 0 then
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s", name, x, y, w, h))
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, p))
                         else
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, table.concat(t, ",")))
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, p,table.concat(t, ",")))
                         end
                     end
                 end
             end
         end
-
-        love.filesystem.write("stj-live-data.csv", table.concat(card_data, "\n"))
-        G.last_stj_save = G.TIMERS.UPTIME
+            
+        G.STJ_MANAGER.channel:push({
+            type = 'save_stj_data',
+            card_data = table.concat(card_data, "\n")})
     end
 end

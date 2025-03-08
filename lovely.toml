@@ -1,5 +1,5 @@
 [manifest]
-version = "0.0.1"
+version = "0.0.2"
 dump_lua = true
 priority = 0
 
@@ -33,9 +33,30 @@ sources = [
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = '''self:splash_screen()
+pattern = '''boot_timer('savemanager', 'shaders',0.4)
 '''
 position = "after"
-payload = '''os.execute('start /b python "%APPDATA%\\Balatro\\Mods\\SlayTheJokers\\stj_uploader.py"')
+payload = '''    G.STJ_MANAGER = {
+        thread = love.thread.newThread([[require "love.system" 
+
+require "love.timer"
+require "love.thread"
+require 'love.filesystem'
+require "engine/object"
+require "engine/string_packer"
+
+--vars needed for sound manager thread
+CHANNEL = love.thread.getChannel("save_stj_data")
+
+ while true do
+    local request = CHANNEL:demand()
+    if request then
+        love.filesystem.write("stj-live-data.csv", request.card_data)
+    end
+end
+]]),
+        channel = love.thread.getChannel('save_stj_data')
+    }
+    G.STJ_MANAGER.thread:start(3)
 '''
 match_indent = true
