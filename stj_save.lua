@@ -17,6 +17,10 @@ function Game:stj_save()
                         elseif name == "Caino" then
                             name = "Canio"
                         end
+
+                        if v.facing and v.facing =='back' then
+                            name = "?"
+                        end
                         
                         local x = string.format("%.3f", v.T.x)
                         local y = string.format("%.3f", v.T.y)
