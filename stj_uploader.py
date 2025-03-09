@@ -35,7 +35,7 @@ def upload_stj_live_data():
             print(f"Uploaded stj-live-data.csv to {bucket_name}/stj-live-data.csv at {time.ctime()}")
         except Exception as e:
             print(f"Slay the Jokers Error: Failed uploading file: {e}")
-        time.sleep(0.5)
+        time.sleep(0.75)
     print("Game closed. Slay the Jokers is exiting...")
 
 upload_stj_live_data()

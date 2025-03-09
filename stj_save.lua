@@ -1,6 +1,6 @@
 
 function Game:stj_save()
-    if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.25 then
+    if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
 
         local card_data = {}
@@ -34,8 +34,9 @@ function Game:stj_save()
                 end
             end
         end
-
-        love.filesystem.write("stj-live-data.csv", table.concat(card_data, "\n"))
-        G.last_stj_save = G.TIMERS.UPTIME
+            
+        G.STJ_MANAGER.channel:push({
+            type = 'save_stj_data',
+            card_data = table.concat(card_data, "\n")})
     end
 end
