@@ -45,25 +45,7 @@ Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over th
 
 *Why?* This black window indicates that "Lovely" is correctly installed and running.
 
-## Step 4: Install Python
-
-- Download Python from https://www.python.org/downloads/
-
-- Run the installer and select "Add Python to PATH" during installation.
-
-*Why?* Python is necessary to run the script that uploads your game data to the overlay server. Python is a programming language commonly used for scripting and automation tasks, such as uploading data to servers. 
-
-## Step 5: Set Up Python Dependencies
-
-Next, open your Windows Command Prompt (type cmd in search) and run these commands:
-
-`pip install psutil`
-
-`pip install google-cloud-storage`
-
-*Why?* These libraries allow Python to communicate with Google Cloud to upload your game data.
-
-## Step 6: Install the "Slay the Jokers" Mod
+## Step 4: Install the "Slay the Jokers" Mod
 
 - Download this mod (Code -> Download Zip)
 
@@ -73,7 +55,15 @@ Next, open your Windows Command Prompt (type cmd in search) and run these comman
 
 *Why?* This is the folder that Lovely injects mods from.
 
-## Step 7: Add Your Credential File
+## Step 5: Install Python via `uv`
+
+- Double click the `install_uv.bat` file in the `SlayTheJokers` folder. This will install [uv](https://docs.astral.sh/uv/guides/install-python/) which we use to run Python code for the mod.
+
+- You should now see the `uv.exe` and `uvx.exe` files in the `SlayTheJokers` folder.
+
+*Why?* Python is necessary to run the script that uploads your game data to the overlay server. Python is a programming language commonly used for scripting and automation tasks, such as uploading data to servers. 
+
+## Step 6: Add Your Credential File
 
 - Launch Balatro again. The black window will show a message similar to "no credentials".
 
@@ -85,7 +75,7 @@ Next, open your Windows Command Prompt (type cmd in search) and run these comman
 
 Note: If your you get an error similar to "Python was not found", make sure python is in the PATH. If it is, I'm still trying to understand what's wrong (something to do with Windows). I will make a branch soon with a workaround that runs the uploading script manually.
 
-## Step 8: Verify Everything Works!
+## Step 7: Verify Everything Works!
 
 - Restart Balatro.
 
