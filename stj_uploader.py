@@ -1,4 +1,5 @@
 import os
+import json
 import time
 import psutil
 from google.cloud import storage
@@ -11,11 +12,24 @@ if not os.path.exists(credential_file):
     print(f"Slay the Jokers Error: Credential file not found: {credential_file}")
     exit()
 
+try:
+    with open(credential_file, "r") as f:
+        credentials = json.load(f)
+        streamer_id = credentials.get("streamer_id")
+        if not streamer_id:
+            print("Slay the Jokers Error: 'streamer_id' not found in credentials file.")
+            exit()
+except Exception as e:
+    print(f"Slay the Jokers Error: Failed to read credentials file: {e}")
+    exit()
+
+upload_path = f"streamers/{streamer_id}/card-data.csv"
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credential_file
 client = storage.Client()
 bucket_name = "stj-live-data"
 bucket = client.bucket(bucket_name)
-bucket_blob = bucket.blob("stj-live-data.csv")
+bucket_blob = bucket.blob(upload_path)
 
 data_file_path = os.path.join(appdata_path, "Balatro", "stj-live-data.csv")
 
@@ -32,7 +46,7 @@ def upload_stj_live_data():
     while is_game_running():
         try:
             bucket_blob.upload_from_filename(data_file_path)
-            print(f"Uploaded stj-live-data.csv to {bucket_name}/stj-live-data.csv at {time.ctime()}")
+            print(f"Uploaded stj-live-data.csv to {bucket_name}/{upload_path} at {time.ctime()}")
         except Exception as e:
             print(f"Slay the Jokers Error: Failed uploading file: {e}")
         time.sleep(0.75)

@@ -26,13 +26,13 @@ function Game:stj_save()
                         local y = string.format("%.3f", v.T.y)
                         local w = string.format("%.3f", v.T.w)
                         local h = string.format("%.3f", v.T.h)
+                        local p = v:get_popup_direction()
                         local t = v:generate_locvars()
-                        -- local p = v:get_popup_direction()
                         
                         if not t or #t == 0 then
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s", name, x, y, w, h))
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, p))
                         else
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, table.concat(t, ",")))
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, p,table.concat(t, ",")))
                         end
                     end
                 end

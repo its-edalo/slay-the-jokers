@@ -202,7 +202,9 @@ function Card:generate_locvars()
 end
 
 function Card:get_popup_direction()
-    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
-           (self.T.y < G.CARD_H*0.8) and 'bm' or
-           'tm'
+    -- Should be 'c' in theory, but the extension works better with just 'b' and 't'
+    --return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
+    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'b' or
+           (self.T.y < G.CARD_H*0.8) and 'b' or
+           't'
 end
