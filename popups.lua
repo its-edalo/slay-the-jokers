@@ -11,8 +11,8 @@ function Card:generate_locvars()
     if self.config.center.unlocked == false and not self.bypass_lock then --For everyting that is locked
         card_type = "Locked"
         if self.area and self.area == G.shop_demo then loc_vars = {}; end
-    elseif self.debuff then
-        loc_vars = { debuffed = true, playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour }
+    -- elseif self.debuff then
+        -- loc_vars = { debuffed = true, playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour }
     elseif card_type == 'Default' or card_type == 'Enhanced' then
         loc_vars = { playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour,
                     nominal_chips = self.base.nominal > 0 and self.base.nominal or nil,
@@ -202,7 +202,9 @@ function Card:generate_locvars()
 end
 
 function Card:get_popup_direction()
-    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
-           (self.T.y < G.CARD_H*0.8) and 'bm' or
-           'tm'
+    -- Should be 'c' in theory, but the extension works better with just 'b' and 't'
+    --return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
+    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'b' or
+           (self.T.y < G.CARD_H*0.8) and 'b' or
+           't'
 end
