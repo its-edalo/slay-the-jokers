@@ -56,6 +56,6 @@ end
 ]]),
         channel = love.thread.getChannel('save_stj_data')
     }
-    G.STJ_MANAGER.thread:start(3)
+    G.STJ_MANAGER.thread:start()
 '''
 match_indent = true

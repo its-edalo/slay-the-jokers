@@ -32,7 +32,7 @@ function Game:stj_save()
                         if not t or #t == 0 then
                             table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, p))
                         else
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, p,table.concat(t, ",")))
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, p, table.concat(t, ",")))
                         end
                     end
                 end
