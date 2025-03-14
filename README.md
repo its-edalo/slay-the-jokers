@@ -1,4 +1,10 @@
-# "Slay the Jokers" Overlay Mod - Installation Guide
+# "Slay the Jokers" Overlay Mod
+
+<img width="861" alt="Screenshot 2025-03-15 at 3 53 34 AM" src="https://github.com/user-attachments/assets/09da2631-24d5-4240-ad29-7e22306c5f5e" />
+
+<img width="862" alt="Screenshot 2025-03-15 at 3 53 12 AM" src="https://github.com/user-attachments/assets/b6142e1a-0d6e-4171-8a31-e7e173329e75" />
+
+# Installation Guide
 
 This simple guide will help you set up the mod that shows card positions on your stream. Each step is explained along with its purpose, so you can understand exactly what is being done and why.
 
