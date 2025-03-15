@@ -37,7 +37,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* "Lovely" is a widely used, trusted modding tool that safely injects mods into the game.
 
-Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over that. You'll have to trust the Lovely developers, I guess.
+**Note**: Lovely triggers some Antiviruses. Unfortunately, I have no control over that. You'll have to trust the Lovely developers, I guess.
 
 ## Step 3: Check Lovely Injector Installation
 
@@ -64,6 +64,10 @@ Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over th
 - Once the installation is complete, the window will close automatically, and you should see `uv.exe` and `uvx.exe` appear in the SlayTheJokers folder.
 
 *Why?* [`uv`](https://docs.astral.sh/uv/) is a lightweight Python package manager that allows the mod to run scripts for uploading the game's data. Python is a programming language commonly used for tasks like automation and sending data to servers.
+
+**Note**: If you're having trouble running `install_uv.bat` by double-clicking, you can run it manually in a command line window:
+- With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
+- In the command window that opens, run `install_uv.bat`
 
 ## Step 6: Add Your Credential File
 
