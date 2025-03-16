@@ -85,9 +85,10 @@ Before installing any mod, it's always smart to back up your game data.
 
 - After the game fully loads, the black command window should now periodically print messages saying it is uploading data.
 
-Done!
 
-You should now see the cards' positions on your stream overlay when you enable the extension. Enjoy streaming!
+**Done!**
+
+You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)). Enjoy streaming!
 
 ---
 
