@@ -37,7 +37,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* "Lovely" is a widely used, trusted modding tool that safely injects mods into the game.
 
-Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over that. You'll have to trust the Lovely developers, I guess.
+**Note**: Lovely triggers some Antiviruses. Unfortunately, I have no control over that. You'll have to trust the Lovely developers, I guess.
 
 ## Step 3: Check Lovely Injector Installation
 
@@ -65,6 +65,10 @@ Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over th
 
 *Why?* [`uv`](https://docs.astral.sh/uv/) is a lightweight Python package manager that allows the mod to run scripts for uploading the game's data. Python is a programming language commonly used for tasks like automation and sending data to servers.
 
+**Note**: If you're having trouble running `install_uv.bat` by double-clicking, you can run it manually in a command line window:
+- With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
+- In the command window that opens, run `install_uv.bat`
+
 ## Step 6: Add Your Credential File
 
 - Launch Balatro again. The black window (that opened alongside the game) will show a message similar to `Credential file not found`.
@@ -81,9 +85,10 @@ Note: Lovely triggers some Antiviruses. Unfortunately, I have no control over th
 
 - After the game fully loads, the black command window should now periodically print messages saying it is uploading data.
 
-Done!
 
-You should now see the cards' positions on your stream overlay when you enable the extension. Enjoy streaming!
+**Done!**
+
+You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)). Enjoy streaming!
 
 ---
 
