@@ -39,7 +39,7 @@ def get_cloud_blob():
             credentials = json.load(f)
             streamer_id = credentials.get("streamer_id")
             if not streamer_id:
-                print("Slay the Jokers Error: 'streamer_id' not found in credentials file.")
+                print("Slay the Jokers Error: 'streamer_id' not found in credentials file")
                 return None
     except Exception as e:
         print(f"Slay the Jokers Error: Failed to read credentials file: {e}")
@@ -104,12 +104,12 @@ def main():
         return
 
     if not is_game_running():
-        print("Slay the Jokers Error: Game is not running.")
+        print("Slay the Jokers Error: Game is not running")
         return
 
     blob = get_cloud_blob()
     if not blob:
-        print(f"Slay the Jokers Error: Failed to create cloud blob.")
+        print(f"Slay the Jokers Error: Failed to create cloud blob")
         return
 
     reader = threading.Thread(target=reader_thread, daemon=True)
@@ -120,7 +120,7 @@ def main():
 
     while True:
         if not reader.is_alive() or not uploader.is_alive():
-            print("Slay the Jokers Error: One of the threads has exited unexpectedly.")
+            print("Slay the Jokers Error: One of the threads has exited unexpectedly")
             break
         if not is_game_running():
             print("Game closed. Slay the Jokers is exiting...")
