@@ -77,7 +77,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)). Enjoy streaming!
 
-**Note**: `uvx` may occasionally reinstall some packages when you open the game if enough time has passed. This can cause a slight delay before the extension starts uploading. This is unintended and will be fixed in a future update.
+**Note**: When you start up the game you may occasionally see messages about `uvx` installing packages, which can cause a slight delay (a few seconds) before the extension starts uploading. This is unintended and will be fixed in a future update - `uvx` seems to be clearing its cache more than expected.
 
 ---
 
