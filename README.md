@@ -1,6 +1,6 @@
 # "Slay the Jokers" Overlay Mod
 
-A mod that allows your viewers to hover over cards on your stream to see their description.
+A mod that allows your viewers to hover over cards on your stream to see their effects and current values.
 
 <img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
 
