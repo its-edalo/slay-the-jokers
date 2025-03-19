@@ -21,8 +21,14 @@ If you need help, have suggestions, or need a credential file, feel free to cont
 
 - **Other Mods & Compatibility**: This mod has not been tested alongside other Balatro mods. Mods that add new cards or modify card names and effects are currently not compatible. Reskins, QoL mods, and other non-card-related mods should work, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
 
-- **Privacy**: This mod *only uploads game-related data* (such as card positions) to the Slay the Jokers server - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
+- **Privacy**: This mod needs to upload data to the Slay the Jokers server (for details, see the `How It Works` section below). This includes **only game-related data** (such as card positions) - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
 
 ## Installation
 
 The installation guide can be found [`here`](INSTALL.md). Be sure to **read the `Things to Know Before Installing` section above** before installing.
+
+## How It Works
+
+When this mod is active, every short interval (of around a second), the game tracks the positions and details of all cards on screen and saves them into a file. A Python script then uploads this file to the Slay the Jokers server.
+
+On the Twitch side, the extension retrieves this information from the server, allowing it to determine where cards are located on the screen and which details they should display.
