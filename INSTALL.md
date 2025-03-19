@@ -77,6 +77,8 @@ Before installing any mod, it's always smart to back up your game data.
 
 You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)). Enjoy streaming!
 
+**Note**: `uvx` may occasionally reinstall some packages when you open the game if enough time has passed. This can cause a slight delay before the extension starts uploading. This is unintended and will be fixed in a future update.
+
 ---
 
 If you ever want to remove the mod, just remove the Lovely DLL (`version.dll`) from the Balatro installation folder and delete the mod folder from `%appdata%\Balatro\Mods`. This will fully uninstall the mod.
