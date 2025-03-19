@@ -2,7 +2,7 @@
 
 A mod that allows your viewers to hover over cards on your stream to see their description.
 
-<img alt="Slay the Jokers Preview Image 1" src="preview1.png" />
+<img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
 
 If you need help, have suggestions, or need a credential file, feel free to contact me on `itsedalo@gmail.com`.
 
