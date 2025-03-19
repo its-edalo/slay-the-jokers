@@ -19,7 +19,7 @@ If you need help, have suggestions, or need a credential file, feel free to cont
 
 - **Windows Only**: This mod currently supports only Windows systems.
 
-- **Other Mods & Compatibility**: This mod has not been tested alongside other Balatro mods. Mods that add or modify cards are currently not compatible. QoL mods and other non-card-related mods should work, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
+- **Other Mods & Compatibility**: This mod has not been tested alongside other Balatro mods. Mods that add new cards or modify card names and effects are currently not compatible. Reskins, QoL mods, and other non-card-related mods should work, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
 
 - **Privacy**: This mod *only uploads game-related data* (such as card positions) to the Slay the Jokers server - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
 
