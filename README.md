@@ -25,4 +25,4 @@ If you need help, have suggestions, or need a credential file, feel free to cont
 
 ## Installation
 
-The installation guide can be found [`here`](INSTALL.md). Be sure to **read the `Things to Know Before Installing` section above** before installing .
+The installation guide can be found [`here`](INSTALL.md). Be sure to **read the `Things to Know Before Installing` section above** before installing.
