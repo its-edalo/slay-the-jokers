@@ -4,6 +4,10 @@ A mod that allows your viewers to hover over cards on your stream to see their e
 
 <img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
 
+*(Screenshotted from [edzyttv](https://www.twitch.tv/edzyttv)'s stream, used with permission)*
+
+---
+
 If you need help, have suggestions, or need a credential file, feel free to contact me on `itsedalo@gmail.com`.
 
 ## Things to Know Before Installing
