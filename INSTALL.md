@@ -36,7 +36,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 ## Step 4: Install the "Slay the Jokers" Mod
 
-- Download this mod (Code -> Download Zip)
+- Download this mod - https://github.com/its-edalo/slay-the-jokers/archive/main.zip
 
 - Unzip the downloaded file.
 
