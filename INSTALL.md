@@ -50,7 +50,7 @@ Before installing any mod, it's always smart to back up your game data.
 - A black command window will open, and you'll see colorful loading bars gradually filling up as `uv` installs.
 - Once the installation is complete, the window will close automatically, and you should see `uv.exe` and `uvx.exe` appear in the SlayTheJokers folder.
 
-*Why?* [`uv`](https://docs.astral.sh/uv/) is a lightweight Python package manager that allows the mod to run scripts for uploading the game's data. Python is a programming language commonly used for tasks like automation and sending data to servers.
+*Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload the game's data to the Slay the Joker server. [`uv`](https://docs.astral.sh/uv/) is a lightweight tool that helps install and run Python effortlessly.
 
 **Note**: If you're having trouble running `install_uv.bat` by double-clicking, you can run it manually in a command line window:
 - With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
