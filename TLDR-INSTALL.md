@@ -13,7 +13,7 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 6. Double-click `install_uv.bat` and wait until it finishes
 7. Place `stj-credentials.json` into the mod's directory
 8. Open Balatro and verify that the black command window prints data upload messages
-9. Enable the [extension](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347) on your Twitch channel. 
+9. Enable the [extension](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347) on your Twitch channel
 
 ---
 
