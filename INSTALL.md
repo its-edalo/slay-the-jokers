@@ -2,7 +2,13 @@
 
 This guide will help you set up the Slay the Jokers Mod. Each step is explained along with its purpose, so you can understand exactly what is being done and why.
 
-If you need help, have suggestions, or need a credential file, contact me on `itsedalo@gmail.com`.
+⚡ **Just want to install the mod quickly and don't care about anything else?** Follow the [TL;DR installation guide](TLDR-INSTALL.md) for a fast setup.
+
+If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
+
+## Pre-Step: Request Your Credential File
+
+Before starting, contact me at `itsedalo@gmail.com` to receive a credential file. 
 
 ## Step 1: Back Up Your Save Folder
 
@@ -62,7 +68,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 - Close the game.
 
-- Place the `stj-credentials.json` file (which I'll send you via Discord or similar) into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
+- Place the `stj-credentials.json` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
 
 *Why?* The credential file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
 

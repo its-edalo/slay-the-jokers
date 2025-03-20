@@ -8,7 +8,7 @@ A mod that allows your viewers to hover over cards on your stream to see their e
 
 ---
 
-If you need help, have suggestions, or need a credential file, feel free to contact me on `itsedalo@gmail.com`.
+If you need help, have suggestions, or need a credential file, feel free to contact me at `itsedalo@gmail.com`.
 
 ## Things to Know Before Installing
 
