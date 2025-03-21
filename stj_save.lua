@@ -11,8 +11,10 @@ function Game:stj_save()
                 for _, v in pairs(source.cards) do
                     if v.ability and saved_sets[v.ability.set] then
                         local name = v.ability.name
+                        local is_modded = false
 
                         if v:is_modded() then
+                            is_modded = true
                             local localization_desc = G.localization.descriptions[v.ability.set][v.ability.name]
                             if localization_desc and localization_desc.name then
                                 name = localization_desc.name
@@ -35,7 +37,7 @@ function Game:stj_save()
                         if v.facing and v.facing =='back' then
                             name = "?"
                         else
-                            desc_args = v:get_desc_args()
+                            desc_args = v:get_desc_args(is_modded)
                         end
 
                         -- if v:is_modded() then

@@ -245,8 +245,8 @@ function Card:get_parsed_text(main_table)
     return str
 end
 
-function Card:get_desc_args()
-    if (self:is_modded()) then
+function Card:get_desc_args(is_modded)
+    if (is_modded) then
         G.DENY_DYNAMIC_TEXT = true
         local main_table = self:generate_UIBox_ability_table()["main"]
         G.DENY_DYNAMIC_TEXT = false
