@@ -11,12 +11,20 @@ function Game:stj_save()
                 for _, v in pairs(source.cards) do
                     if v.ability and saved_sets[v.ability.set] then
                         local name = v.ability.name
+
+                        if v:is_modded() then
+                            local localization_desc = G.localization.descriptions[v.ability.set][v.ability.name]
+                            if localization_desc and localization_desc.name then
+                                name = localization_desc.name
+                            end
+                        end
+
                         if name == "Riff-raff" then
                             name = "Riff-Raff"
                         elseif name == "Caino" then
                             name = "Canio"
                         end
-                        
+
                         local x = string.format("%.3f", v.T.x)
                         local y = string.format("%.3f", v.T.y)
                         local w = string.format("%.3f", v.T.w)
@@ -30,9 +38,9 @@ function Game:stj_save()
                             desc_args = v:get_desc_args()
                         end
 
-                        if v:is_modded() then
-                            name = name .. " (modded)"
-                        end
+                        -- if v:is_modded() then
+                            -- name = name .. " (modded)"
+                        -- end
                         
                         if not desc_args or #desc_args == 0 then
                             table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction))

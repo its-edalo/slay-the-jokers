@@ -74,7 +74,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "engine/text.lua"
-pattern = '''function DynaText:init(config)
+pattern = '''    self.string = (config.string and type(config.string) == 'table' and config.string[1]) or {'HELLO WORLD'}
 '''
 position = "after"
 payload = '''    if G.DENY_DYNAMIC_TEXT then
@@ -82,3 +82,4 @@ payload = '''    if G.DENY_DYNAMIC_TEXT then
     end
 '''
 match_indent = true
+
