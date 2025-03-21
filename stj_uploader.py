@@ -9,8 +9,8 @@ from google.cloud import storage
 
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
-# Not recommended to go below 0.5 or above 3.5
-UPLOAD_DELAY = 0.7
+# Not recommended to go above 3.5
+UPLOAD_DELAY = 0.3
 
 # Don't change the values below unless you know what you're doing
 GAME_PROCESS_NAME = "Balatro.exe"
