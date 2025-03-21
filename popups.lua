@@ -208,3 +208,47 @@ function Card:get_popup_direction()
            (self.T.y < G.CARD_H*0.8) and 'b' or
            't'
 end
+
+function Card:is_modded()
+    local modded = false
+    for _, name in pairs(BASE_GAME_CARDS) do
+        if name == self.ability.name then
+            return false
+        end
+    end
+    return true
+end
+
+function Card:get_parsed_text(main_table)
+    local str = ""
+    local line_count = #main_table
+    for i, line in pairs(main_table) do
+        for _, part in pairs(line) do
+            if part.config and part.config.text then
+                str = str .. part.config.text
+            end
+        end
+        if i < line_count then
+            str = str .. "\\n"
+        end
+    end
+    return str
+end
+
+function Card:get_desc_args()
+    if (self:is_modded()) then
+        G.DENY_DYNAMIC_TEXT = true
+        local main_table = self:generate_UIBox_ability_table()["main"]
+        G.DENY_DYNAMIC_TEXT = false
+
+        return "modded," .. self:get_parsed_text(main_table)
+    else
+        local locvars = self:generate_locvars()
+        if not locvars or #locvars == 0 then
+            return ""
+        end
+        return table.concat(locvars, ",")
+    end
+end
+
+BASE_GAME_CARDS = {"8 Ball", "Abstract Joker", "Acrobat", "Ancient Joker", "Arrowhead", "Astronomer", "Banner", "Baron", "Baseball Card", "Blackboard", "Bloodstone", "Blue Joker", "Blueprint", "Bootstraps", "Brainstorm", "Bull", "Burglar", "Burnt Joker", "Business Card", "Canio", "Campfire", "Card Sharp", "Cartomancer", "Castle", "Cavendish", "Ceremonial Dagger", "Certificate", "Chaos the Clown", "Chicot", "Clever Joker", "Cloud 9", "Constellation", "Crafty Joker", "Crazy Joker", "Credit Card", "Delayed Gratification", "Devious Joker", "Diet Cola", "DNA", "Driver's License", "Droll Joker", "Drunkard", "The Duo", "Dusk", "Egg", "Erosion", "Even Steven", "Faceless Joker", "The Family", "Fibonacci", "Flash Card", "Flower Pot", "Fortune Teller", "Four Fingers", "Gift Card", "Glass Joker", "Gluttonous Joker", "Golden Joker", "Greedy Joker", "Green Joker", "Gros Michel", "Hack", "Half Joker", "Hallucination", "Hanging Chad", "Hiker", "Hit the Road", "Hologram", "Ice Cream", "The Idol", "Invisible Joker", "Joker", "Jolly Joker", "Juggler", "Loyalty Card", "Luchador", "Lucky Cat", "Lusty Joker", "Mad Joker", "Madness", "Mail-In Rebate", "Marble Joker", "Matador", "Merry Andy", "Midas Mask", "Mime", "Misprint", "Mr. Bones", "Mystic Summit", "Obelisk", "Odd Todd", "Onyx Agate", "Oops! All 6s", "The Order", "Pareidolia", "Perkeo", "Photograph", "Popcorn", "Raised Fist", "Ramen", "Red Card", "Reserved Parking", "Ride the Bus", "Riff-Raff", "Showman", "Rocket", "Rough Gem", "Runner", "Satellite", "Scary Face", "Scholar", "Seance", "Seeing Double", "Seltzer", "Shoot the Moon", "Shortcut", "Sixth Sense", "Sly Joker", "Smeared Joker", "Smiley Face", "Sock and Buskin", "Space Joker", "Splash", "Square Joker", "Steel Joker", "Joker Stencil", "Stone Joker", "Stuntman", "Supernova", "Superposition", "Swashbuckler", "Throwback", "Golden Ticket", "To the Moon", "To Do List", "Trading Card", "The Tribe", "Triboulet", "The Trio", "Troubadour", "Spare Trousers", "Turtle Bean", "Vagabond", "Vampire", "Walkie Talkie", "Wee Joker", "Wily Joker", "Wrathful Joker", "Yorick", "Zany Joker", "Ceres", "Earth", "Eris", "Jupiter", "Mars", "Mercury", "Neptune", "Planet X", "Pluto", "Saturn", "Uranus", "Venus", "Ankh", "Aura", "Black Hole", "Cryptid", "Deja Vu", "Ectoplasm", "Familiar", "Grim", "Hex", "Immolate", "Incantation", "Medium", "Ouija", "Sigil", "The Soul", "Talisman", "Trance", "Wraith", "Boss Tag", "Buffoon Tag", "Charm Tag", "Coupon Tag", "D6 Tag", "Double Tag", "Economy Tag", "Ethereal Tag", "Foil Tag", "Garbage Tag", "Handy Tag", "Holographic Tag", "Investment Tag", "Juggle Tag", "Meteor Tag", "Negative Tag", "Orbital Tag", "Polychrome Tag", "Rare Tag", "Speed Tag", "Standard Tag", "Top-up Tag", "Uncommon Tag", "Voucher Tag", "The Chariot", "Death", "The Devil", "The Emperor", "The Empress", "The Fool", "The Hanged Man", "The Hierophant", "The Hermit", "The High Priestess", "Judgement", "Justice", "The Lovers", "The Magician", "The Moon", "The Star", "Strength", "The Sun", "Temperance", "The Tower", "The Wheel of Fortune", "The World", "Antimatter", "Blank", "Clearance Sale", "Crystal Ball", "Director's Cut", "Glow Up", "Grabber", "Hieroglyph", "Hone", "Illusion", "Liquidation", "Magic Trick", "Money Tree", "Nacho Tong", "Observatory", "Omen Globe", "Overstock", "Overstock Plus", "Paint Brush", "Palette", "Petroglyph", "Planet Merchant", "Planet Tycoon", "Recyclomancy", "Reroll Glut", "Reroll Surplus", "Retcon", "Seed Money", "Tarot Merchant", "Tarot Tycoon", "Telescope", "Wasteful"}

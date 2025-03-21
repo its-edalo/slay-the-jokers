@@ -1,4 +1,3 @@
-
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
@@ -17,22 +16,28 @@ function Game:stj_save()
                         elseif name == "Caino" then
                             name = "Canio"
                         end
-
-                        if v.facing and v.facing =='back' then
-                            name = "?"
-                        end
                         
                         local x = string.format("%.3f", v.T.x)
                         local y = string.format("%.3f", v.T.y)
                         local w = string.format("%.3f", v.T.w)
                         local h = string.format("%.3f", v.T.h)
-                        local p = v:get_popup_direction()
-                        local t = v:generate_locvars()
-                        
-                        if not t or #t == 0 then
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, p))
+                        local popup_direction = v:get_popup_direction()
+                        local desc_args = nil
+
+                        if v.facing and v.facing =='back' then
+                            name = "?"
                         else
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, p, table.concat(t, ",")))
+                            desc_args = v:get_desc_args()
+                        end
+
+                        if v:is_modded() then
+                            name = name .. " (modded)"
+                        end
+                        
+                        if not desc_args or #desc_args == 0 then
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction))
+                        else
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction, desc_args))
                         end
                     end
                 end
