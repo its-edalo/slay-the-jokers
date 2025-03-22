@@ -58,7 +58,7 @@ def get_formatted_time():
 
 def upload_card_data(blob, card_data):
     blob.upload_from_string(card_data)
-    print(f"Uploaded card data to {BUCKET_NAME}/{blob.name} at {get_formatted_time()}")
+    print(f"Uploaded card data to {BUCKET_NAME}/{blob.name} at {get_formatted_time()}", flush=True)
 
 def reader_thread():
     while True:
@@ -68,11 +68,11 @@ def reader_thread():
             with upload_lock:
                 upload_queue.append((card_data, time.time()))
         except Exception as e:
-            print(f"Slay the Jokers Error: Failed to read card data file: {e}")
+            print(f"Slay the Jokers Error: Failed to read card data file: {e}", flush=True)
             break
         time.sleep(UPLOAD_INTERVAL)
 
-    print("Slay the Jokers: Reader thread exiting...")
+    print("Slay the Jokers: Reader thread exiting...", flush=True)
     return
 
 def uploader_thread(blob):
@@ -87,7 +87,7 @@ def uploader_thread(blob):
                         try:
                             upload_card_data(blob, card_data)
                         except Exception as e:
-                            print(f"Slay the Jokers Error: Failed uploading file: {e}")
+                            print(f"Slay the Jokers Error: Failed uploading file: {e}", flush=True)
                     else:
                         time_until_upload = UPLOAD_DELAY - (current_time - request_time)
                         upload_queue.appendleft((card_data, request_time))
@@ -95,7 +95,7 @@ def uploader_thread(blob):
             else:
                 time_until_upload = UPLOAD_DELAY
         time.sleep(max(time_until_upload / 2, 0.1))
-    print("Slay the Jokers: Uploader thread exiting...")
+    print("Slay the Jokers: Uploader thread exiting...", flush=True)
     return
 
 def main():
