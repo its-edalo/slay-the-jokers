@@ -49,7 +49,8 @@ function Game:stj_save()
                         if not desc_args or #desc_args == 0 then
                             table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction))
                         else
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction, desc_args))
+                            local desc_args_str = table.concat(desc_args, ",")
+                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction, desc_args_str))
                         end
                     end
                 end

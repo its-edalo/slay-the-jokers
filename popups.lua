@@ -1,6 +1,6 @@
 function Card:generate_locvars()
     local card_type = self.ability.set or "None"
-    local loc_vars = nil
+    local loc_vars = {}
 
     if not self.bypass_lock and self.config.center.unlocked ~= false and
     (self.ability.set == 'Joker' or self.ability.set == 'Edition' or self.ability.consumeable or self.ability.set == 'Voucher' or self.ability.set == 'Booster') and
@@ -231,13 +231,9 @@ end
 
 function Card:get_desc_args(is_modded)
     if (is_modded) then
-        return nil
+        return {}
     else
-        local locvars = self:generate_locvars()
-        if not locvars or #locvars == 0 then
-            return ""
-        end
-        return table.concat(locvars, ",")
+        return self:generate_locvars()
     end
 end
 

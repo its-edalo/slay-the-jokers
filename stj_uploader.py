@@ -73,7 +73,7 @@ def reader_thread():
                 if file_size <= MAX_FILE_SIZE:
                     card_data = f.read()
                 else:
-                    print(f"Slay the Jokers Warning: Card data file is too large")
+                    print(f"Slay the Jokers Warning: Card data file is too large", flush=True)
             with upload_lock:
                 upload_queue.append((card_data, time.time()))
         except Exception as e:
