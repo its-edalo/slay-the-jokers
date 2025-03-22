@@ -3,13 +3,19 @@ function Game:stj_save()
         G.last_stj_save = G.TIMERS.UPTIME
 
         local card_data = {}
-        local card_sources = {G.jokers, G.consumeables, G.shop_jokers, G.pack_cards}
-        local saved_sets = {Joker = true, Tarot = true, Planet = true, Spectral = true}
-        
-        for _, source in ipairs(card_sources) do
+        local card_sources = {
+            jokers = G.jokers,
+            consumeables = G.consumeables,
+            shop_jokers = G.shop_jokers,
+            pack_cards = G.pack_cards,
+            shop_vouchers = G.shop_vouchers,
+        }
+        local unsaved_card_sets = {Back = true, Default = true, Enhanced = true, Edition = true, Seal = true, Other = true}
+
+        for _, source in pairs(card_sources) do
             if source and source.cards then
                 for _, v in pairs(source.cards) do
-                    if v.ability and saved_sets[v.ability.set] then
+                    if v.ability and not unsaved_card_sets[v.ability.set] then
                         local name = v.ability.name
                         local is_modded = false
 

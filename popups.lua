@@ -196,17 +196,29 @@ function Card:generate_locvars()
         elseif self.ability.name == "The Sun" then loc_vars = {self.ability.consumeable.max_highlighted, localize(self.ability.consumeable.suit_conv, 'suits_plural'), colours = {G.C.SUITS[self.ability.consumeable.suit_conv]}}
         elseif self.ability.name == "The World" then loc_vars = {self.ability.consumeable.max_highlighted, localize(self.ability.consumeable.suit_conv, 'suits_plural'), colours = {G.C.SUITS[self.ability.consumeable.suit_conv]}}
         end
+    elseif self.ability.set == 'Voucher' then
+        if self.ability.name == "Overstock" or self.ability.name == 'Overstock Plus' then
+        elseif self.ability.name == "Tarot Merchant" or self.ability.name == "Tarot Tycoon" then loc_vars = {self.config.center.config.extra_disp}
+        elseif self.ability.name == "Planet Merchant" or self.ability.name == "Planet Tycoon" then loc_vars = {self.config.center.config.extra_disp}
+        elseif self.ability.name == "Hone" or self.ability.name == "Glow Up" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Reroll Surplus" or self.ability.name == "Reroll Glut" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Grabber" or self.ability.name == "Nacho Tong" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Wasteful" or self.ability.name == "Recyclomancy" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Seed Money" or self.ability.name == "Money Tree" then loc_vars = {self.config.center.config.extra/5}
+        elseif self.ability.name == "Blank" or self.ability.name == "Antimatter" then
+        elseif self.ability.name == "Hieroglyph" or self.ability.name == "Petroglyph" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Director's Cut" or self.ability.name == "Retcon" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Paint Brush" or self.ability.name == "Palette" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Telescope" or self.ability.name == "Observatory" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Clearance Sale" or self.ability.name == "Liquidation" then loc_vars = {self.config.center.config.extra}
+        end
     end
 
     return loc_vars
 end
 
 function Card:get_popup_direction()
-    -- Should be 'c' in theory, but the extension works better with just 'b' and 't'
-    --return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
-    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'b' or
-           (self.T.y < G.CARD_H*0.8) and 'b' or
-           't'
+    return (self.T.y < 5) and 'b' or 't'
 end
 
 function Card:is_modded()
