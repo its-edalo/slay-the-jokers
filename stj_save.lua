@@ -21,9 +21,12 @@ function Game:stj_save()
 
                         if v:is_modded() then
                             is_modded = true
-                            local localization_desc = G.localization.descriptions[v.ability.set][v.ability.name]
-                            if localization_desc and localization_desc.name then
-                                name = localization_desc.name
+                            local localization_set = G.localization.descriptions[v.ability.set]
+                            if localization_set then
+                                local localization_desc = localization_set[v.ability.name]
+                                if localization_desc and localization_desc.name then
+                                    name = localization_desc.name
+                                end
                             end
                         end
 
