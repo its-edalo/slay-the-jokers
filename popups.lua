@@ -1,6 +1,6 @@
 function Card:generate_locvars()
     local card_type = self.ability.set or "None"
-    local loc_vars = nil
+    local loc_vars = {}
 
     if not self.bypass_lock and self.config.center.unlocked ~= false and
     (self.ability.set == 'Joker' or self.ability.set == 'Edition' or self.ability.consumeable or self.ability.set == 'Voucher' or self.ability.set == 'Booster') and
@@ -196,15 +196,45 @@ function Card:generate_locvars()
         elseif self.ability.name == "The Sun" then loc_vars = {self.ability.consumeable.max_highlighted, localize(self.ability.consumeable.suit_conv, 'suits_plural'), colours = {G.C.SUITS[self.ability.consumeable.suit_conv]}}
         elseif self.ability.name == "The World" then loc_vars = {self.ability.consumeable.max_highlighted, localize(self.ability.consumeable.suit_conv, 'suits_plural'), colours = {G.C.SUITS[self.ability.consumeable.suit_conv]}}
         end
+    elseif self.ability.set == 'Voucher' then
+        if self.ability.name == "Overstock" or self.ability.name == 'Overstock Plus' then
+        elseif self.ability.name == "Tarot Merchant" or self.ability.name == "Tarot Tycoon" then loc_vars = {self.config.center.config.extra_disp}
+        elseif self.ability.name == "Planet Merchant" or self.ability.name == "Planet Tycoon" then loc_vars = {self.config.center.config.extra_disp}
+        elseif self.ability.name == "Hone" or self.ability.name == "Glow Up" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Reroll Surplus" or self.ability.name == "Reroll Glut" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Grabber" or self.ability.name == "Nacho Tong" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Wasteful" or self.ability.name == "Recyclomancy" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Seed Money" or self.ability.name == "Money Tree" then loc_vars = {self.config.center.config.extra/5}
+        elseif self.ability.name == "Blank" or self.ability.name == "Antimatter" then
+        elseif self.ability.name == "Hieroglyph" or self.ability.name == "Petroglyph" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Director's Cut" or self.ability.name == "Retcon" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Paint Brush" or self.ability.name == "Palette" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Telescope" or self.ability.name == "Observatory" then loc_vars = {self.config.center.config.extra}
+        elseif self.ability.name == "Clearance Sale" or self.ability.name == "Liquidation" then loc_vars = {self.config.center.config.extra}
+        end
     end
 
     return loc_vars
 end
 
 function Card:get_popup_direction()
-    -- Should be 'c' in theory, but the extension works better with just 'b' and 't'
-    --return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
-    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'b' or
-           (self.T.y < G.CARD_H*0.8) and 'b' or
-           't'
+    -- Uncomment when the hovering hitbox will be more precise
+    -- return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
+            -- (self.T.y < G.CARD_H*0.8) and 'b' or
+            -- 't'
+    return (self.T.y < 5) and 'b' or 't'
 end
+
+function Card:is_modded()
+    return not BASE_GAME_CARDS[self.ability.name]
+end
+
+function Card:get_desc_args(is_modded)
+    if (is_modded) then
+        return {}
+    else
+        return self:generate_locvars()
+    end
+end
+
+BASE_GAME_CARDS = {["8 Ball"] = true, ["Abstract Joker"] = true, ["Acrobat"] = true, ["Ancient Joker"] = true, ["Arrowhead"] = true, ["Astronomer"] = true, ["Banner"] = true, ["Baron"] = true, ["Baseball Card"] = true, ["Blackboard"] = true, ["Bloodstone"] = true, ["Blue Joker"] = true, ["Blueprint"] = true, ["Bootstraps"] = true, ["Brainstorm"] = true, ["Bull"] = true, ["Burglar"] = true, ["Burnt Joker"] = true, ["Business Card"] = true, ["Caino"] = true, ["Campfire"] = true, ["Card Sharp"] = true, ["Cartomancer"] = true, ["Castle"] = true, ["Cavendish"] = true, ["Ceremonial Dagger"] = true, ["Certificate"] = true, ["Chaos the Clown"] = true, ["Chicot"] = true, ["Clever Joker"] = true, ["Cloud 9"] = true, ["Constellation"] = true, ["Crafty Joker"] = true, ["Crazy Joker"] = true, ["Credit Card"] = true, ["Delayed Gratification"] = true, ["Devious Joker"] = true, ["Diet Cola"] = true, ["DNA"] = true, ["Driver's License"] = true, ["Droll Joker"] = true, ["Drunkard"] = true, ["The Duo"] = true, ["Dusk"] = true, ["Egg"] = true, ["Erosion"] = true, ["Even Steven"] = true, ["Faceless Joker"] = true, ["The Family"] = true, ["Fibonacci"] = true, ["Flash Card"] = true, ["Flower Pot"] = true, ["Fortune Teller"] = true, ["Four Fingers"] = true, ["Gift Card"] = true, ["Glass Joker"] = true, ["Gluttonous Joker"] = true, ["Golden Joker"] = true, ["Greedy Joker"] = true, ["Green Joker"] = true, ["Gros Michel"] = true, ["Hack"] = true, ["Half Joker"] = true, ["Hallucination"] = true, ["Hanging Chad"] = true, ["Hiker"] = true, ["Hit the Road"] = true, ["Hologram"] = true, ["Ice Cream"] = true, ["The Idol"] = true, ["Invisible Joker"] = true, ["Joker"] = true, ["Jolly Joker"] = true, ["Juggler"] = true, ["Loyalty Card"] = true, ["Luchador"] = true, ["Lucky Cat"] = true, ["Lusty Joker"] = true, ["Mad Joker"] = true, ["Madness"] = true, ["Mail-In Rebate"] = true, ["Marble Joker"] = true, ["Matador"] = true, ["Merry Andy"] = true, ["Midas Mask"] = true, ["Mime"] = true, ["Misprint"] = true, ["Mr. Bones"] = true, ["Mystic Summit"] = true, ["Obelisk"] = true, ["Odd Todd"] = true, ["Onyx Agate"] = true, ["Oops! All 6s"] = true, ["The Order"] = true, ["Pareidolia"] = true, ["Perkeo"] = true, ["Photograph"] = true, ["Popcorn"] = true, ["Raised Fist"] = true, ["Ramen"] = true, ["Red Card"] = true, ["Reserved Parking"] = true, ["Ride the Bus"] = true, ["Riff-raff"] = true, ["Showman"] = true, ["Rocket"] = true, ["Rough Gem"] = true, ["Runner"] = true, ["Satellite"] = true, ["Scary Face"] = true, ["Scholar"] = true, ["Seance"] = true, ["Seeing Double"] = true, ["Seltzer"] = true, ["Shoot the Moon"] = true, ["Shortcut"] = true, ["Sixth Sense"] = true, ["Sly Joker"] = true, ["Smeared Joker"] = true, ["Smiley Face"] = true, ["Sock and Buskin"] = true, ["Space Joker"] = true, ["Splash"] = true, ["Square Joker"] = true, ["Steel Joker"] = true, ["Joker Stencil"] = true, ["Stone Joker"] = true, ["Stuntman"] = true, ["Supernova"] = true, ["Superposition"] = true, ["Swashbuckler"] = true, ["Throwback"] = true, ["Golden Ticket"] = true, ["To the Moon"] = true, ["To Do List"] = true, ["Trading Card"] = true, ["The Tribe"] = true, ["Triboulet"] = true, ["The Trio"] = true, ["Troubadour"] = true, ["Spare Trousers"] = true, ["Turtle Bean"] = true, ["Vagabond"] = true, ["Vampire"] = true, ["Walkie Talkie"] = true, ["Wee Joker"] = true, ["Wily Joker"] = true, ["Wrathful Joker"] = true, ["Yorick"] = true, ["Zany Joker"] = true, ["Ceres"] = true, ["Earth"] = true, ["Eris"] = true, ["Jupiter"] = true, ["Mars"] = true, ["Mercury"] = true, ["Neptune"] = true, ["Planet X"] = true, ["Pluto"] = true, ["Saturn"] = true, ["Uranus"] = true, ["Venus"] = true, ["Ankh"] = true, ["Aura"] = true, ["Black Hole"] = true, ["Cryptid"] = true, ["Deja Vu"] = true, ["Ectoplasm"] = true, ["Familiar"] = true, ["Grim"] = true, ["Hex"] = true, ["Immolate"] = true, ["Incantation"] = true, ["Medium"] = true, ["Ouija"] = true, ["Sigil"] = true, ["The Soul"] = true, ["Talisman"] = true, ["Trance"] = true, ["Wraith"] = true, ["Boss Tag"] = true, ["Buffoon Tag"] = true, ["Charm Tag"] = true, ["Coupon Tag"] = true, ["D6 Tag"] = true, ["Double Tag"] = true, ["Economy Tag"] = true, ["Ethereal Tag"] = true, ["Foil Tag"] = true, ["Garbage Tag"] = true, ["Handy Tag"] = true, ["Holographic Tag"] = true, ["Investment Tag"] = true, ["Juggle Tag"] = true, ["Meteor Tag"] = true, ["Negative Tag"] = true, ["Orbital Tag"] = true, ["Polychrome Tag"] = true, ["Rare Tag"] = true, ["Speed Tag"] = true, ["Standard Tag"] = true, ["Top-up Tag"] = true, ["Uncommon Tag"] = true, ["Voucher Tag"] = true, ["The Chariot"] = true, ["Death"] = true, ["The Devil"] = true, ["The Emperor"] = true, ["The Empress"] = true, ["The Fool"] = true, ["The Hanged Man"] = true, ["The Hierophant"] = true, ["The Hermit"] = true, ["The High Priestess"] = true, ["Judgement"] = true, ["Justice"] = true, ["The Lovers"] = true, ["The Magician"] = true, ["The Moon"] = true, ["The Star"] = true, ["Strength"] = true, ["The Sun"] = true, ["Temperance"] = true, ["The Tower"] = true, ["The Wheel of Fortune"] = true, ["The World"] = true, ["Antimatter"] = true, ["Blank"] = true, ["Clearance Sale"] = true, ["Crystal Ball"] = true, ["Director's Cut"] = true, ["Glow Up"] = true, ["Grabber"] = true, ["Hieroglyph"] = true, ["Hone"] = true, ["Illusion"] = true, ["Liquidation"] = true, ["Magic Trick"] = true, ["Money Tree"] = true, ["Nacho Tong"] = true, ["Observatory"] = true, ["Omen Globe"] = true, ["Overstock"] = true, ["Overstock Plus"] = true, ["Paint Brush"] = true, ["Palette"] = true, ["Petroglyph"] = true, ["Planet Merchant"] = true, ["Planet Tycoon"] = true, ["Recyclomancy"] = true, ["Reroll Glut"] = true, ["Reroll Surplus"] = true, ["Retcon"] = true, ["Seed Money"] = true, ["Tarot Merchant"] = true, ["Tarot Tycoon"] = true, ["Telescope"] = true, ["Wasteful"] = true}

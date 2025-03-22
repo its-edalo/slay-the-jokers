@@ -9,7 +9,7 @@ from google.cloud import storage
 
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
-# Not recommended to go below 0.5 or above 3.5
+# Not recommended to go above 3.5
 UPLOAD_DELAY = 0.7
 
 # Don't change the values below unless you know what you're doing
@@ -61,10 +61,19 @@ def upload_card_data(blob, card_data):
     print(f"Uploaded card data to {BUCKET_NAME}/{blob.name} at {get_formatted_time()}", flush=True)
 
 def reader_thread():
+    MAX_FILE_SIZE = 50 * 1024
+
     while True:
         try:
+            card_data = ""
             with open(CARD_DATA_FILE_PATH, "r") as f:
-                card_data = f.read()
+                f.seek(0, os.SEEK_END)
+                file_size = f.tell()
+                f.seek(0, os.SEEK_SET)
+                if file_size <= MAX_FILE_SIZE:
+                    card_data = f.read()
+                else:
+                    print(f"Slay the Jokers Warning: Card data file is too large", flush=True)
             with upload_lock:
                 upload_queue.append((card_data, time.time()))
         except Exception as e:
