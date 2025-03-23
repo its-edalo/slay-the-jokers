@@ -1,6 +1,6 @@
 function Card:generate_locvars()
     local card_type = self.ability.set or "None"
-    local loc_vars = nil
+    local loc_vars = {}
 
     if not self.bypass_lock and self.config.center.unlocked ~= false and
     (self.ability.set == 'Joker' or self.ability.set == 'Edition' or self.ability.consumeable or self.ability.set == 'Voucher' or self.ability.set == 'Booster') and
@@ -218,6 +218,10 @@ function Card:generate_locvars()
 end
 
 function Card:get_popup_direction()
+    -- Uncomment when the hovering hitbox will be more precise
+    -- return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
+            -- (self.T.y < G.CARD_H*0.8) and 'b' or
+            -- 't'
     return (self.T.y < 5) and 'b' or 't'
 end
 
@@ -257,13 +261,9 @@ function Card:get_desc_args(is_modded)
         local main_table = self:generate_UIBox_ability_table()["main"]
         G.DENY_DYNAMIC_TEXT = false
 
-        return "modded," .. self:get_parsed_text(main_table)
+        return {"modded", self:get_parsed_text(main_table)}
     else
-        local locvars = self:generate_locvars()
-        if not locvars or #locvars == 0 then
-            return ""
-        end
-        return table.concat(locvars, ",")
+        return self:generate_locvars()
     end
 end
 

@@ -10,7 +10,7 @@ from google.cloud import storage
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
 # Not recommended to go above 3.5
-UPLOAD_DELAY = 0.3
+UPLOAD_DELAY = 0.7
 
 # Don't change the values below unless you know what you're doing
 GAME_PROCESS_NAME = "Balatro.exe"
@@ -73,7 +73,7 @@ def reader_thread():
                 if file_size <= MAX_FILE_SIZE:
                     card_data = f.read()
                 else:
-                    print(f"Slay the Jokers Warning: Card data file is too large")
+                    print(f"Slay the Jokers Warning: Card data file is too large", flush=True)
             with upload_lock:
                 upload_queue.append((card_data, time.time()))
         except Exception as e:
