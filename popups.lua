@@ -218,11 +218,12 @@ function Card:generate_locvars()
 end
 
 function Card:get_popup_direction()
-    -- Uncomment when the hovering hitbox will be more precise
-    -- return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'c' or
-            -- (self.T.y < G.CARD_H*0.8) and 'b' or
-            -- 't'
-    return (self.T.y < 5) and 'b' or 't'
+    if self.ability.set == 'Voucher' then
+        return 'r'
+    end
+    return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'l' or
+            (self.T.y < G.CARD_H*0.8) and 'b' or
+            't'
 end
 
 function Card:is_modded()
