@@ -54,6 +54,10 @@ function Game:stj_save()
                         else
                             desc_args = v:get_desc_args(is_modded)
                         end
+
+                        -- if v:is_modded() then
+                            -- name = name .. " (modded)"
+                        -- end
                         
                         if not desc_args or #desc_args == 0 then
                             table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction))

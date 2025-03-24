@@ -229,9 +229,39 @@ function Card:is_modded()
     return not BASE_GAME_CARDS[self.ability.name]
 end
 
+function Card:get_parsed_text(main_table)
+    local str = ""
+    local line_count = #main_table
+    for i, line in pairs(main_table) do
+        for _, part in pairs(line) do
+            -- Note - The lovely DLL itself changes `localize`! Don't rely on the source code alone.
+            if part.config then
+                if part.config.text then
+                    str = str .. part.config.text
+                end
+            end
+            if part.nodes and #part.nodes > 0 and part.nodes[1].config then
+                if part.nodes[1].config.text then
+                    str = str .. part.nodes[1].config.text
+                elseif part.nodes[1].config.object and part.nodes[1].config.object.string then
+                    str = str .. part.nodes[1].config.object.string
+                end
+            end
+        end
+        if i < line_count then
+            str = str .. "\\n"
+        end
+    end
+    return str
+end
+
 function Card:get_desc_args(is_modded)
     if (is_modded) then
-        return {}
+        G.DENY_DYNAMIC_TEXT = true
+        local main_table = self:generate_UIBox_ability_table()["main"]
+        G.DENY_DYNAMIC_TEXT = false
+
+        return {"modded", self:get_parsed_text(main_table)}
     else
         return self:generate_locvars()
     end
