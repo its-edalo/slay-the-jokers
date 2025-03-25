@@ -258,6 +258,16 @@ function Card:get_parsed_text(main_table)
     return str
 end
 
+function get_string_array(tbl)
+    local stbl = {}
+    for k, v in pairs(tbl) do
+        if type(k) == 'number' then
+            stbl[k] = tostring(v)
+        end
+    end
+    return stbl
+end
+
 function Card:get_description_table(is_modded)
     if (is_modded) then
         G.DENY_DYNAMIC_TEXT = true
@@ -268,6 +278,6 @@ function Card:get_description_table(is_modded)
         return {["t"] = self:get_parsed_text(main_table)}
     else
         -- arguments
-        return {["a"] = self:generate_locvars()}
+        return {["a"] = get_string_array(self:generate_locvars())}
     end
 end
