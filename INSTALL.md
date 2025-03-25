@@ -6,9 +6,9 @@ This guide will help you set up the Slay the Jokers Mod. Each step is explained 
 
 If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
-## Pre-Step: Request Your Credential File
+## Pre-Step: Request Your Upload Key
 
-Before starting, contact me at `itsedalo@gmail.com` to receive a credential file. 
+Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.
 
 ## Step 1: Back Up Your Save Folder
 
@@ -62,15 +62,15 @@ Before installing any mod, it's always smart to back up your game data.
 - With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
 - In the command window that opens, run `install_uv.bat`
 
-## Step 6: Add Your Credential File
+## Step 6: Add Your Upload Key
 
-- Launch Balatro again. The black window (that opened alongside the game) will show a message similar to `Credential file not found`.
+- Launch Balatro again. The black window (that opened alongside the game) will show a message similar to `Upload key file not found`.
 
 - Close the game.
 
-- Place the `stj-credentials.json` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
+- Place the `upload.key` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
 
-*Why?* The credential file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
+*Why?* The upload key file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
 
 ## Step 7: Verify Everything Works!
 

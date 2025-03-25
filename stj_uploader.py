@@ -28,9 +28,13 @@ upload_queue = collections.deque(maxlen=MAX_UPLOAD_QUEUE_SIZE)
 upload_lock = threading.Lock()
 
 def is_game_running():
-    return any(GAME_PROCESS_NAME.lower() in process.info["name"].lower() for process in psutil.process_iter(attrs=["name"])) or 1
+    return any(GAME_PROCESS_NAME.lower() in process.info["name"].lower() for process in psutil.process_iter(attrs=["name"]))
 
 def get_upload_key():
+    if not os.path.exists(UPLOAD_KEY_PATH):
+        print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
+        return None
+
     try:
         with open(UPLOAD_KEY_PATH, "r") as f:
             return f.read().strip()
@@ -50,7 +54,7 @@ def upload_to_server(upload_data, remote_filename, upload_key):
     if response.status_code != 200:
         print(f"Slay the Jokers Error: Failed to upload file: {response.text}", flush=True)
     else:
-        print(f"Uploaded live data to {UPLOAD_URL} at {get_formatted_time()}", flush=True)
+        print(f"Slay the Jokers uploaded data successfully at {get_formatted_time()}", flush=True)
 
 def reader_thread():
     MAX_FILE_SIZE = 50 * 1024
