@@ -17,4 +17,4 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 
 ---
 
-If anything is unclear or you run into issues, try referring to the [full installation guide](INSTALL.md). 
+If anything is unclear or you run into issues, try referring to the [full installation guide](../INSTALL.md). 

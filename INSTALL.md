@@ -2,7 +2,7 @@
 
 This guide will help you set up the Slay the Jokers Mod. Each step is explained along with its purpose, so you can understand exactly what is being done and why.
 
-⚡ **Just want to install the mod quickly and don't care about anything else?** Follow the [TL;DR installation guide](TLDR-INSTALL.md) for a fast setup.
+⚡ **Just want to install the mod quickly and don't care about anything else?** Follow the [TL;DR installation guide](docs/TLDR-INSTALL.md) for a fast setup.
 
 If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 

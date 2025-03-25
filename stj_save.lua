@@ -1,7 +1,61 @@
+STJ_VERSION = "0.1"
+
+function encode_card(card)
+    local data = {}
+    local name = card.ability.name
+    local is_modded = false
+    local desc_args = nil
+
+    if card:is_modded() then
+        is_modded = true
+        local localization_set = G.localization.descriptions[card.ability.set]
+        if localization_set and card.config.center_key then
+            local localization_desc = localization_set[card.config.center_key]
+            if localization_desc and localization_desc.name then
+                name = localization_desc.name
+            end
+        end
+    end
+
+    if name == "Riff-raff" then
+        name = "Riff-Raff"
+    elseif name == "Caino" then
+        name = "Canio"
+    end
+
+    if card.facing and card.facing =='back' then
+        name = "?"
+    else
+        desc_args = card:get_description_table(is_modded)
+    end
+
+    -- name
+    data.n = name
+    -- position and size
+    data.x = string.format("%.3f", 5.4 + card.T.x * 4.4)
+    data.y = string.format("%.3f", 4 + card.T.y * 7.822)
+    data.w = string.format("%.3f", card.T.w * 4.4)
+    data.h = string.format("%.3f", card.T.h * 7.822)
+
+    -- popup direction
+    data.p = card:get_popup_direction()
+
+    -- description
+    data.d = desc_args
+
+    -- modded
+    if (is_modded) then
+        data.m = 1
+    end
+
+    return data
+end
+
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
 
+        local live_data = {}
         local card_data = {}
         local card_sources = {
             jokers = G.jokers,
@@ -22,56 +76,17 @@ function Game:stj_save()
             if source and source.cards then
                 for _, v in pairs(source.cards) do
                     if v.ability and not unsaved_card_sets[v.ability.set] then
-                        local name = v.ability.name
-                        local is_modded = false
-
-                        if v:is_modded() then
-                            is_modded = true
-                            local localization_set = G.localization.descriptions[v.ability.set]
-                            if localization_set and v.config.center_key then
-                                local localization_desc = localization_set[v.config.center_key]
-                                if localization_desc and localization_desc.name then
-                                    name = localization_desc.name
-                                end
-                            end
-                        end
-
-                        if name == "Riff-raff" then
-                            name = "Riff-Raff"
-                        elseif name == "Caino" then
-                            name = "Canio"
-                        end
-
-                        local x = string.format("%.3f", v.T.x)
-                        local y = string.format("%.3f", v.T.y)
-                        local w = string.format("%.3f", v.T.w)
-                        local h = string.format("%.3f", v.T.h)
-                        local popup_direction = v:get_popup_direction()
-                        local desc_args = nil
-
-                        if v.facing and v.facing =='back' then
-                            name = "?"
-                        else
-                            desc_args = v:get_desc_args(is_modded)
-                        end
-
-                        -- if v:is_modded() then
-                            -- name = name .. " (modded)"
-                        -- end
-                        
-                        if not desc_args or #desc_args == 0 then
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction))
-                        else
-                            local desc_args_str = table.concat(desc_args, ",")
-                            table.insert(card_data, string.format("%s,%s,%s,%s,%s,%s,%s", name, x, y, w, h, popup_direction, desc_args_str))
-                        end
+                        table.insert(card_data, encode_card(v))
                     end
                 end
             end
         end
-            
+
+        live_data.v = STJ_VERSION
+        live_data.c = card_data
+
         G.STJ_MANAGER.channel:push({
             type = 'save_stj_data',
-            card_data = table.concat(card_data, "\n")})
+            card_data = json.encode(live_data)})
     end
 end
