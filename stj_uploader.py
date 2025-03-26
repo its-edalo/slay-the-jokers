@@ -2,10 +2,11 @@ import os
 import json
 import time
 import psutil
+import requests
 import threading
 import collections
+from io import BytesIO
 from datetime import datetime
-from google.cloud import storage
 
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
@@ -14,12 +15,12 @@ UPLOAD_DELAY = 0.7
 
 # Don't change the values below unless you know what you're doing
 GAME_PROCESS_NAME = "Balatro.exe"
-BUCKET_NAME = "stj-live-data"
 APPDATA_PATH = os.getenv("APPDATA")
 BALATRO_PATH = os.path.join(APPDATA_PATH, "Balatro")
-CREDENTIAL_FILE_PATH = os.path.join(BALATRO_PATH, "Mods", "SlayTheJokers", "stj-credentials.json")
-CARD_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.csv")
-UPLOAD_PATH_TEMPLATE = "streamers/{streamer_id}/card-data.csv"
+UPLOAD_KEY_PATH = os.path.join(BALATRO_PATH, "Mods", "SlayTheJokers", "upload.key")
+LIVE_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.json")
+REMOTE_LIVE_DATA_FILE_NAME = "live-data.json"
+UPLOAD_URL = "https://edalo.net/stj/upload"
 UPLOAD_INTERVAL = 0.9
 MAX_UPLOAD_QUEUE_SIZE = 5
 
@@ -29,77 +30,72 @@ upload_lock = threading.Lock()
 def is_game_running():
     return any(GAME_PROCESS_NAME.lower() in process.info["name"].lower() for process in psutil.process_iter(attrs=["name"]))
 
-def get_cloud_blob():
-    if not os.path.exists(CREDENTIAL_FILE_PATH):
-        print(f"Slay the Jokers Error: Credential file not found: {CREDENTIAL_FILE_PATH}")
+def get_upload_key():
+    if not os.path.exists(UPLOAD_KEY_PATH):
+        print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
         return None
 
     try:
-        with open(CREDENTIAL_FILE_PATH, "r") as f:
-            credentials = json.load(f)
-            streamer_id = credentials.get("streamer_id")
-            if not streamer_id:
-                print("Slay the Jokers Error: 'streamer_id' not found in credentials file")
-                return None
+        with open(UPLOAD_KEY_PATH, "r") as f:
+            return f.read().strip()
     except Exception as e:
-        print(f"Slay the Jokers Error: Failed to read credentials file: {e}")
+        print(f"Slay the Jokers Error: Failed to read upload key file: {e}")
         return None
-
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = CREDENTIAL_FILE_PATH
-    upload_path = UPLOAD_PATH_TEMPLATE.format(streamer_id=streamer_id)
-    client = storage.Client()
-    bucket = client.bucket(BUCKET_NAME)
-    blob = bucket.blob(upload_path)
-
-    return blob
 
 def get_formatted_time():
     return datetime.now().strftime("%H:%M:%S.%f")[:-4]
 
-def upload_card_data(blob, card_data):
-    blob.upload_from_string(card_data)
-    print(f"Uploaded card data to {BUCKET_NAME}/{blob.name} at {get_formatted_time()}", flush=True)
+def upload_to_server(upload_data, remote_filename, upload_key):
+    tmp_file = BytesIO(upload_data.encode())
+    files = {"file": (remote_filename, tmp_file)}
+    payload = {"key": upload_key}
+
+    response = requests.post(UPLOAD_URL, files=files, data=payload)
+    if response.status_code != 200:
+        print(f"Slay the Jokers Error: Failed to upload file: {response.text}", flush=True)
+    else:
+        print(f"Slay the Jokers uploaded data successfully at {get_formatted_time()}", flush=True)
 
 def reader_thread():
     MAX_FILE_SIZE = 50 * 1024
 
     while True:
         try:
-            card_data = ""
-            with open(CARD_DATA_FILE_PATH, "r") as f:
+            live_data = ""
+            with open(LIVE_DATA_FILE_PATH, "r") as f:
                 f.seek(0, os.SEEK_END)
                 file_size = f.tell()
                 f.seek(0, os.SEEK_SET)
                 if file_size <= MAX_FILE_SIZE:
-                    card_data = f.read()
+                    live_data = f.read()
                 else:
-                    print(f"Slay the Jokers Warning: Card data file is too large", flush=True)
+                    print(f"Slay the Jokers Warning: live data file is too large", flush=True)
             with upload_lock:
-                upload_queue.append((card_data, time.time()))
+                upload_queue.append((live_data, time.time()))
         except Exception as e:
-            print(f"Slay the Jokers Error: Failed to read card data file: {e}", flush=True)
+            print(f"Slay the Jokers Error: Failed to read live data file: {e}", flush=True)
             break
         time.sleep(UPLOAD_INTERVAL)
 
     print("Slay the Jokers: Reader thread exiting...", flush=True)
     return
 
-def uploader_thread(blob):
+def uploader_thread(upload_key):
     while True:
         time_until_upload = 0
         with upload_lock:
             if upload_queue:
                 current_time = time.time()
                 for _ in range(len(upload_queue)):
-                    card_data, request_time = upload_queue.popleft()
+                    upload_data, request_time = upload_queue.popleft()
                     if current_time - request_time > UPLOAD_DELAY:
                         try:
-                            upload_card_data(blob, card_data)
+                            upload_to_server(upload_data, REMOTE_LIVE_DATA_FILE_NAME, upload_key)
                         except Exception as e:
                             print(f"Slay the Jokers Error: Failed uploading file: {e}", flush=True)
                     else:
                         time_until_upload = UPLOAD_DELAY - (current_time - request_time)
-                        upload_queue.appendleft((card_data, request_time))
+                        upload_queue.appendleft((upload_data, request_time))
                         break
             else:
                 time_until_upload = UPLOAD_DELAY
@@ -116,13 +112,13 @@ def main():
         print("Slay the Jokers Error: Game is not running")
         return
 
-    blob = get_cloud_blob()
-    if not blob:
-        print(f"Slay the Jokers Error: Failed to create cloud blob")
+    upload_key = get_upload_key()
+    if not upload_key:
+        print(f"Slay the Jokers Error: Failed to get upload key")
         return
 
     reader = threading.Thread(target=reader_thread, daemon=True)
-    uploader = threading.Thread(target=uploader_thread, args=(blob,), daemon=True)
+    uploader = threading.Thread(target=uploader_thread, args=(upload_key,), daemon=True)
 
     reader.start()
     uploader.start()

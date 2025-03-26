@@ -1,5 +1,5 @@
 [manifest]
-version = "0.0.3"
+version = "0.1"
 dump_lua = true
 priority = 0
 
@@ -8,7 +8,15 @@ priority = 0
 target = "card.lua"
 position = "append"
 sources = [
-	"popups.lua"
+	"description.lua"
+]
+
+[[patches]]
+[patches.copy]
+target = "game.lua"
+position = "append"
+sources = [
+	"libs/json.lua"
 ]
 
 [[patches]]
@@ -50,7 +58,7 @@ CHANNEL = love.thread.getChannel("save_stj_data")
  while true do
     local request = CHANNEL:demand()
     if request then
-        love.filesystem.write("stj-live-data.csv", request.card_data)
+        love.filesystem.write("stj-live-data.json", request.card_data)
     end
 end
 ]]),
