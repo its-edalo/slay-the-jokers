@@ -9,9 +9,12 @@
 
 - Tags and Boss Blinds are not hoverable
 - Sub-popups (describing keywords) are not implemented
-- Rarities are not specified
 
 ## Mods
 
 - Modded card descriptions are not formatted or colored
 - Some Cryptid cards are not shown correctly (or at all)
+
+## Codebase
+
+- `uvx` is still using the `google-cloud-storage` package which is no longer needed (replace `--with google-cloud-storage` with `--with requests`)
