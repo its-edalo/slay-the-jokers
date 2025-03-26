@@ -12,7 +12,7 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
 
 ## Things to Know Before Installing
 
-- **Disclaimer**: This mod is currently in beta, so some features might not work perfectly. If you encounter any issues, please let me know!
+- **Disclaimer**: This mod is still under development, so some features might not work perfectly. If you encounter any issues, please let me know!
     - *More formal disclaimer for meanies: this project is a hobby project, provided as-is, with no guarantees of stability, correctness, or suitability for any purpose. You're welcome to use it - but I take no responsibility if something goes wrong.*
 
 - **Access Permissions**: Currently, in order to use this mod, you need permissions to upload to the Slay the Jokers server. **Contact me before installing** in order to receive an upload key.
