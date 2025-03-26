@@ -18,3 +18,4 @@
 ## Codebase
 
 - `uvx` is still using the `google-cloud-storage` package which is no longer needed (replace `--with google-cloud-storage` with `--with requests`)
+- `uvx` re-installs libraries after the game has not been opened for a while
