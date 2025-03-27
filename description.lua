@@ -260,6 +260,11 @@ end
 
 function get_string_array(tbl)
     local stbl = {}
+
+    if not tbl then
+        return {}
+    end
+
     for k, v in pairs(tbl) do
         if type(k) == 'number' then
             stbl[k] = tostring(v)

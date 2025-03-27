@@ -1,11 +1,35 @@
 STJ_VERSION = "0.1"
 
+function is_encodable(card)
+    if not card.ability or not card.ability.name or not card.ability.set then
+        return false
+    end
+
+    if not card.config or not card.config.center_key then
+        return false
+    end
+
+    if not card.children then
+        return false
+    end
+
+    if not card.T or card.T.x == nil or card.T.y == nil or card.T.w == nil or card.T.h == nil then
+        return false
+    end
+
+    return true
+end
+
 function encode_card(card)
     local data = {}
-    local name = card.ability.name
     local is_modded = false
     local desc_args = nil
 
+    if not is_encodable(card) then
+        return nil
+    end
+
+    local name = card.ability.name
     if card:is_modded() then
         is_modded = true
         local localization_set = G.localization.descriptions[card.ability.set]
@@ -65,9 +89,9 @@ function Game:stj_save()
             shop_vouchers = G.shop_vouchers,
         }
         -- if G.your_collection then
-            -- for i, card_line in ipairs(G.your_collection) do
-                -- card_sources["collection_line" .. i] = card_line
-            -- end
+        --     for i, card_line in ipairs(G.your_collection) do
+        --         card_sources["collection_line" .. i] = card_line
+        --     end
         -- end
 
         local unsaved_card_sets = {Back = true, Default = true, Enhanced = true, Edition = true, Seal = true, Other = true}
@@ -76,7 +100,10 @@ function Game:stj_save()
             if source and source.cards then
                 for _, v in pairs(source.cards) do
                     if v.ability and not unsaved_card_sets[v.ability.set] then
-                        table.insert(card_data, encode_card(v))
+                        local encoded_card = encode_card(v)
+                        if encoded_card then
+                            table.insert(card_data, encoded_card)
+                        end
                     end
                 end
             end
