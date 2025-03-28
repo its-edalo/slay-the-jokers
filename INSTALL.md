@@ -54,19 +54,16 @@ Before installing any mod, it's always smart to back up your game data.
 
 ## Step 5: Install `uv` (Python Package Manager)
 
-- Open the `SlayTheJokers` folder and double-click `install_uv.bat`. This will install `uv`, which is required to run Python for uploading the game's data.
-- A black command window will open, and you'll see colorful loading bars gradually filling up as `uv` installs.
-- Once the installation is complete, the window will close automatically, and you should see `uv.exe` and `uvx.exe` appear in the SlayTheJokers folder.
+- Press Windows + R, type `cmd`, and press Enter.
+- In the command window that opens, copy and paste the next line and press Enter:  
+`set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers && powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+- This will install `uv` in the mod installation folder.
 
 *Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload the game's data to the Slay the Jokers server. [`uv`](https://docs.astral.sh/uv/) is a lightweight tool that helps install and run Python effortlessly.
 
-**Note**: If you're having trouble running `install_uv.bat` by double-clicking, you can run it manually in a command line window:
-- With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
-- In the command window that opens, run `install_uv.bat`
-
 ## Step 6: Add Your Upload Key
 
-- Launch Balatro again. The black window (that opened alongside the game) will show a message similar to `Upload key file not found`.
+- Launch Balatro again. The black window (that opened alongside the game) will install required packages, then show a message similar to `Upload key file not found`.
 
 - Close the game.
 
@@ -85,7 +82,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)). Enjoy streaming!
 
-**Note**: When you start up the game you may occasionally see messages about `uvx` installing packages, which can cause a slight delay (a few seconds) before the extension starts uploading. This is unintended and will be fixed in a future update - `uvx` seems to be clearing its cache more than expected.
+**Note**: When you start up the game you may occasionally see messages about `uvx` installing packages again, which can cause a slight delay (a few seconds) before the extension starts uploading. This is unintended and will be fixed in a future update - `uvx` seems to be clearing its cache more than expected.
 
 ---
 

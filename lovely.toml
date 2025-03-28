@@ -75,7 +75,7 @@ pattern = '''self:splash_screen()
 '''
 position = "after"
 payload = '''
-os.execute('start /b %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\uvx.exe --with psutil --with google-cloud-storage python@3.12 %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\stj_uploader.py')
+os.execute('start /b %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\uvx.exe --with psutil --with requests python@3.12 %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\stj_uploader.py')
 '''
 match_indent = true
 
