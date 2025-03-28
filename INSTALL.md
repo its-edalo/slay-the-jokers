@@ -52,11 +52,9 @@ Before installing any mod, it's always smart to back up your game data.
 
 ## Step 5: Install `uv` (Python Package Manager)
 
-- With the `SlayTheJokers` folder open, click on the folder path bar at the top of the window, type `cmd`, and press Enter.
+- Press Windows + R, type cmd, and press Enter.
 - In the command window that opens, copy and paste the next line and press Enter:  
-`set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers`
-- Next, copy and paste the next line and press Enter:  
-`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+`set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers && powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 - This will install `uv` in the mod installation folder.
 
 *Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload the game's data to the Slay the Jokers server. [`uv`](https://docs.astral.sh/uv/) is a lightweight tool that helps install and run Python effortlessly.
