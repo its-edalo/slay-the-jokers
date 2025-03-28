@@ -52,7 +52,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 ## Step 5: Install `uv` (Python Package Manager)
 
-- Press Windows + R, type cmd, and press Enter.
+- Press Windows + R, type `cmd`, and press Enter.
 - In the command window that opens, copy and paste the next line and press Enter:  
 `set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers && powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 - This will install `uv` in the mod installation folder.
