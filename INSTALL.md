@@ -50,8 +50,6 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* This is the folder that Lovely injects mods from.
 
-**Note**: If Chrome blocks your download, it's because of the `install_uv.bat` file in the next step. Try switching to [this](https://github.com/its-edalo/slay-the-jokers/blob/feature/no-bat-file/INSTALL.md) version of the mod without this file, that instructs how to install `uv` manually.
-
 ## Step 5: Install `uv` (Python Package Manager)
 
 - Press Windows + R, type `cmd`, and press Enter.
