@@ -8,7 +8,7 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 1. Contact me at `itsedalo@gmail.com` to receive `upload.key`
 2. Download [Lovely](https://www.github.com/ethangreen-dev/lovely-injector/releases/tag/v0.7.1) 
 3. Unzip it and move the `version.dll` file into the Balatro installation folder (where `Balatro.exe` is)
-4. Download [this mod](https://github.com/its-edalo/slay-the-jokers/archive/refs/heads/main.zip)
+4. Download [this mod](https://github.com/its-edalo/slay-the-jokers/archive/main.zip)
 5. Unzip it, move the unzipped folder into `%appdata%\Balatro\Mods`, and rename it to `SlayTheJokers`
 6. Open a command line window (press Windows + R, type cmd, and press Enter), copy and paste the next line and press Enter:
 `set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers && powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"`
