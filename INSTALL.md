@@ -68,6 +68,8 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload game data to the Slay the Jokers server. `uv` makes it simple to install and run Python packages without needing a global Python installation.
 
+**Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window — that's normal.
+
 ## Step 7: Verify Everything Works!
 
 - After setup completes, the black command window should periodically print messages indicating that data is being uploaded.
