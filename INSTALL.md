@@ -50,31 +50,27 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* This is the folder that Lovely injects mods from.
 
-## Step 5: Install `uv` (Python Package Manager)
-
-- Press Windows + R, type `cmd`, and press Enter.
-- In the command window that opens, copy and paste the next line and press Enter:  
-`set UV_UNMANAGED_INSTALL=%APPDATA%\Balatro\Mods\SlayTheJokers && powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"`
-- This will install `uv` in the mod installation folder.
-
-*Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload the game's data to the Slay the Jokers server. [`uv`](https://docs.astral.sh/uv/) is a lightweight tool that helps install and run Python effortlessly.
-
-## Step 6: Add Your Upload Key
-
-- Launch Balatro again. The black window (that opened alongside the game) will install required packages, then show a message similar to `Upload key file not found`.
-
-- Close the game.
+## Step 5: Add Your Upload Key
 
 - Place the `upload.key` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
 
 *Why?* The upload key file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
 
+## Step 6: Perform First-time Setup
+
+- Launch Balatro and wait for the game to fully load.
+
+- The black command window will automatically download and install the required tools:
+    - [`uv`](https://docs.astral.sh/uv/), a lightweight Python package manager.
+    - Python libraries used by the mod.
+
+- The `uv` installation will only happen the first time you launch the game.
+
+*Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload game data to the Slay the Jokers server. `uv` makes it simple to install and run Python packages without needing a global Python installation.
+
 ## Step 7: Verify Everything Works!
 
-- Restart Balatro.
-
-- After the game fully loads, the black command window should now periodically print messages saying it is uploading data.
-
+- After setup completes, the black command window should periodically print messages indicating that data is being uploaded.
 
 **Done!**
 
