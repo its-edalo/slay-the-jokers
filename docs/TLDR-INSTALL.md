@@ -13,7 +13,7 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 6. Place `upload.key` in the `SlayTheJokers` directory
 7. Launch Balatro and wait for it to fully load.  
     - A black command window (part of `Lovely`) will appear
-    - On first launch, it will automatically install required tools this mod
+    - On first launch, it will automatically install required tools for this mod
 8. After all installations are done, verify that the black window prints data upload messages periodically
 9. Enable the [extension](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347) on your Twitch channel
 
