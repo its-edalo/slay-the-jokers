@@ -13,7 +13,7 @@
 ## Mods
 
 - Modded card descriptions are not formatted or colored
-- Some Cryptid cards are not shown correctly (or at all)
+- Some Cryptid card titles are not shown correctly
 
 ## Codebase
 
