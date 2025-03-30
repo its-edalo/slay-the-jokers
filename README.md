@@ -26,7 +26,7 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
             - [Extra Credit](https://github.com/GuilloryCraft/ExtraCredit)
             - [Paperback](https://github.com/Balatro-Paperback/paperback)
             - [Neato](https://github.com/neatoqueen/NeatoJokers)
-            - [Cryptid](https://github.com/MathIsFun0/Cryptid) (with some minor issues - see [known issues](docs/known-issues.md))
+            - [Cryptid](https://github.com/MathIsFun0/Cryptid)
     - Incompatible mods:
         - Mods that modify existing card names and effects are **not** compatible.
         - The multiplayer mod has **not** been thoroughly tested and some users have reported crashes on past versions (that were hopefully fixed by the latest updates). 
