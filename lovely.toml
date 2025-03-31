@@ -75,7 +75,7 @@ pattern = '''self:splash_screen()
 '''
 position = "after"
 payload = '''
-os.execute('start /b %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\uvx.exe --with psutil --with requests python@3.12 %APPDATA%\\Balatro\\Mods\\SlayTheJokers\\stj_uploader.py')
+os.execute('start /b powershell -ExecutionPolicy Bypass -File "%APPDATA%\\Balatro\\Mods\\SlayTheJokers\\stj_launch_uploader.ps1"')
 '''
 match_indent = true
 
