@@ -71,7 +71,12 @@ Before installing any mod, it's always smart to back up your game data.
 
 *Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload game data to the Slay the Jokers server. `uv` makes it simple to install and run Python packages without needing a global Python installation.
 
-**Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window.
+**Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window.  
+
+**Debugging Errors**: If you get an error similar to:  
+- `Provide the path to an existing '.ps1' file` - make sure that you named the mod folder `SlayTheJokers`.
+- `Failed to get upload key` - make sure that you placed the `upload.key` file in the `SlayTheJokers` directory.
+- `Failed to upload file` / `Invalid key` - the `upload.key` seems to be corrupted. Make sure that it's the right file, or request a new one.
 
 ## Step 7: Verify Everything Works!
 
