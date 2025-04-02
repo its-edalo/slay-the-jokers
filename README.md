@@ -1,5 +1,10 @@
 # "Slay the Jokers" Overlay Mod
 
+⚡ **Just want to install the mod quickly and don't care about anything else?** Follow the [TL;DR installation guide](docs/TLDR-INSTALL.md) for a fast setup.  
+- However, I do recommend to continue reading instead.
+
+## Overview
+
 A mod that allows your viewers to hover over cards on your stream to see their effects and current values.
 
 <img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
