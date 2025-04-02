@@ -8,7 +8,10 @@ If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
 ## Pre-Step: Request Your Upload Key
 
-Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.
+Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.  
+- Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`.
+
+*Why?* Each streamer gets a unique key so their stream data stays separate. This prevents issues where one person's mod could interfere with another streamer's overlay.
 
 ## Step 1: Back Up Your Save Folder
 
@@ -54,7 +57,7 @@ Before installing any mod, it's always smart to back up your game data.
 
 - Place the `upload.key` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
 
-*Why?* The upload key file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
+*Why?* This key tells the mod who you are, so it can safely upload data to the server folder linked to your Twitch stream.
 
 ## Step 6: Perform First-time Setup
 
