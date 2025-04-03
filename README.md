@@ -33,8 +33,9 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
             - [Neato](https://github.com/neatoqueen/NeatoJokers)
             - [Cryptid](https://github.com/MathIsFun0/Cryptid)
     - Incompatible mods:
-        - Mods that modify existing card names and effects are **not** compatible.
-        - The multiplayer mod has **not** been thoroughly tested and some users have reported crashes on past versions (that were hopefully fixed by the latest updates). 
+        - Mods that modify existing card effects are **not** compatible.
+    - Needs more testing:
+        - The multiplayer mod has **not** been thoroughly tested and some users have reported crashes on past versions (that were hopefully fixed by the latest updates).   
 
 - **Privacy**: This mod needs to upload data to the Slay the Jokers server (for details, see the `How It Works` section below). This includes **only game-related data** (such as card positions) - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
 
