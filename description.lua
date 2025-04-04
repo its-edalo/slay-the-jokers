@@ -343,10 +343,10 @@ function Card:get_description_table(is_modded)
         end
 
         -- text
-        local desc_table = {["t"] = self:get_parsed_text(main_table)}
+        -- local desc_table = {["t"] = self:get_parsed_text(main_table)}
 
         -- parts
-        desc_table["p"] = self:get_text_parts(main_table)
+        local desc_table = {["p"] = self:get_text_parts(main_table)}
         return desc_table
     else
         -- arguments
