@@ -78,18 +78,6 @@ Before installing any mod, it's always smart to back up your game data.
 - `Failed to get upload key` - make sure that you placed the `upload.key` file in the `SlayTheJokers` directory.
 - `Failed to upload file` / `Invalid key` - the `upload.key` seems to be corrupted. Make sure that it's the right file, or request a new one.
 
-## Step 6: Perform First-time Setup
-
-- Launch Balatro and wait for the game to fully load.
-
-- The black command window will automatically download and install the required tools:
-    - [`uv`](https://docs.astral.sh/uv/), a lightweight Python package manager.
-    - Python libraries used by the mod.
-
-- The `uv` installation will only happen the first time you launch the game.
-
-*Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload game data to the Slay the Jokers server. `uv` makes it simple to install and run Python packages without needing a global Python installation.
-
 ## Step 7: Verify Everything Works!
 
 - After setup completes, the black command window should periodically print messages indicating that data is being uploaded.
