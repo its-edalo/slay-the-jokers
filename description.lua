@@ -258,6 +258,65 @@ function Card:get_parsed_text(main_table)
     return str
 end
 
+function colourToJson(colour)
+    local function toHex(v)
+        return string.format("%02x", math.floor(v * 255 + 0.5))
+    end
+
+    if not colour or type(colour) ~= 'table' or #colour < 3 then
+        return nil
+    end
+
+    local r = toHex(colour[1] or 0)
+    local g = toHex(colour[2] or 0)
+    local b = toHex(colour[3] or 0)
+    local a = toHex(colour[4] == nil and 1 or colour[4])
+    return "#" .. r .. g .. b .. a
+end
+
+function Card:get_text_parts(main_table)
+    local parts_table = {}
+    local line_count = #main_table
+    for i, line in pairs(main_table) do
+        for _, part in pairs(line) do
+            -- Note - The lovely DLL itself changes `localize`! Don't rely on the source code alone.
+            local parsed_part = nil
+            local bg = nil
+            if part.config then
+                if part.config.text then
+                    parsed_part = {["t"] = part.config.text, ["c"] = colourToJson(part.config.colour)}
+                elseif part.config.colour then
+                    bg = colourToJson(part.config.colour)
+                end
+            end
+            if not parsed_part and part.nodes and #part.nodes > 0 and part.nodes[1].config then
+                local node_config = part.nodes[1].config
+                if node_config.text then
+                    parsed_part = {["t"] = node_config.text, ["c"] = colourToJson(node_config.colour)}
+                elseif node_config.object and node_config.object.string then
+                    parsed_part = {["t"] = node_config.object.string}
+
+                    local colours = node_config.object.colours
+                    if colours and #colours > 0 then
+                        parsed_part["c"] = colourToJson(colours[1])
+                    end
+                end
+            end
+
+            if parsed_part then
+                if bg then
+                    parsed_part["b"] = bg
+                end
+                table.insert(parts_table, parsed_part)
+            end
+        end
+        if i < line_count then
+            table.insert(parts_table, {["n"] = 1})
+        end
+    end
+    return parts_table
+end
+
 function get_string_array(tbl)
     local stbl = {}
 
@@ -279,8 +338,16 @@ function Card:get_description_table(is_modded)
         local main_table = self:generate_UIBox_ability_table()["main"]
         G.DENY_DYNAMIC_TEXT = false
 
+        if not main_table then
+            return {}
+        end
+
         -- text
-        return {["t"] = self:get_parsed_text(main_table)}
+        local desc_table = {["t"] = self:get_parsed_text(main_table)}
+
+        -- parts
+        desc_table["p"] = self:get_text_parts(main_table)
+        return desc_table
     else
         -- arguments
         return {["a"] = get_string_array(self:generate_locvars())}

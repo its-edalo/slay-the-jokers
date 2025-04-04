@@ -5,7 +5,7 @@ function is_encodable(card)
         return false
     end
 
-    if not card.config or not card.config.center_key then
+    if not card.config or not card.config.center or not card.config.center_key then
         return false
     end
 
