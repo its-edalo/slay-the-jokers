@@ -62,7 +62,7 @@ def reader_thread():
     while True:
         try:
             live_data = ""
-            with open(LIVE_DATA_FILE_PATH, "r") as f:
+            with open(LIVE_DATA_FILE_PATH, "r", encoding="utf-8") as f:
                 f.seek(0, os.SEEK_END)
                 file_size = f.tell()
                 f.seek(0, os.SEEK_SET)

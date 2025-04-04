@@ -82,7 +82,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "engine/text.lua"
-pattern = '''    self.string = (config.string and type(config.string) == 'table' and config.string[1]) or {'HELLO WORLD'}
+pattern = '''self.colours = config.colours or {G.C.RED}
 '''
 position = "after"
 payload = '''    if G.DENY_DYNAMIC_TEXT then
