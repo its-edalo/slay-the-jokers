@@ -8,7 +8,10 @@ If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
 ## Pre-Step: Request Your Upload Key
 
-Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.
+Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.  
+- Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`.
+
+*Why?* Each streamer gets a unique key so their stream data stays separate. This prevents issues where one person's mod could interfere with another streamer's overlay.
 
 ## Step 1: Back Up Your Save Folder
 
@@ -54,7 +57,26 @@ Before installing any mod, it's always smart to back up your game data.
 
 - Place the `upload.key` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
 
-*Why?* The upload key file provides the necessary authentication for the mod to upload data to the Slay the Jokers server.
+*Why?* This key tells the mod who you are, so it can safely upload data to the server folder linked to your Twitch stream.
+
+## Step 6: Perform First-time Setup
+
+- Launch Balatro and wait for the game to fully load.
+
+- The black command window will automatically download and install the required tools:
+    - [`uv`](https://docs.astral.sh/uv/), a lightweight Python package manager.
+    - Python libraries used by the mod.
+
+- The `uv` installation will only happen the first time you launch the game.
+
+*Why?* This mod uses [`Python`](https://www.python.org/), a popular programming language, to upload game data to the Slay the Jokers server. `uv` makes it simple to install and run Python packages without needing a global Python installation.
+
+**Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window.  
+
+**Debugging Errors**: If you get an error similar to:  
+- `Provide the path to an existing '.ps1' file` - make sure that you named the mod folder `SlayTheJokers`.
+- `Failed to get upload key` - make sure that you placed the `upload.key` file in the `SlayTheJokers` directory.
+- `Failed to upload file` / `Invalid key` - the `upload.key` seems to be corrupted. Make sure that it's the right file, or request a new one.
 
 ## Step 6: Perform First-time Setup
 

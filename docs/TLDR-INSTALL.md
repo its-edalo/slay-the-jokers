@@ -5,7 +5,8 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 
 ## Instructions
 
-1. Contact me at `itsedalo@gmail.com` to receive `upload.key`
+1. Contact me at `itsedalo@gmail.com` to receive `upload.key`  
+    - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`
 2. Download [Lovely](https://www.github.com/ethangreen-dev/lovely-injector/releases/tag/v0.7.1) 
 3. Unzip it and move the `version.dll` file into the Balatro installation folder (where `Balatro.exe` is)
 4. Download [this mod](https://github.com/its-edalo/slay-the-jokers/archive/main.zip)
@@ -13,7 +14,7 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 6. Place `upload.key` in the `SlayTheJokers` directory
 7. Launch Balatro and wait for it to fully load.  
     - A black command window (part of `Lovely`) will appear
-    - On first launch, it will automatically install required tools this mod
+    - On first launch, it will automatically install required tools for this mod
 8. After all installations are done, verify that the black window prints data upload messages periodically
 9. Enable the [extension](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347) on your Twitch channel
 

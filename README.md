@@ -1,5 +1,10 @@
 # "Slay the Jokers" Overlay Mod
 
+⚡ **Just want to install the mod quickly and don't care about anything else?** Follow the [TL;DR installation guide](docs/TLDR-INSTALL.md) for a fast setup.  
+- However, I do recommend to continue reading instead, to make sure that the mod is compatible for you.
+
+## Overview
+
 A mod that allows your viewers to hover over cards on your stream to see their effects and current values.
 
 <img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
@@ -15,7 +20,8 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
 - **Disclaimer**: This mod is still under development, so some features might not work perfectly. If you encounter any issues, please let me know!
     - *More formal disclaimer for meanies: this project is a hobby project, provided as-is, with no guarantees of stability, correctness, or suitability for any purpose. You're welcome to use it - but I take no responsibility if something goes wrong.*
 
-- **Access Permissions**: Currently, in order to use this mod, you need permissions to upload to the Slay the Jokers server. **Contact me before installing** in order to receive an upload key.
+- **Access Permissions**: Currently, in order to use this mod, you need permissions to upload to the Slay the Jokers server. **Contact me before installing** at `itsedalo@gmail.com` in order to receive an upload key.
+    - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key.`, word for word if you want. I'll try to send you the key quickly.
 
 - **Windows Only**: This mod currently supports only Windows systems.
 
@@ -26,10 +32,11 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
             - [Extra Credit](https://github.com/GuilloryCraft/ExtraCredit)
             - [Paperback](https://github.com/Balatro-Paperback/paperback)
             - [Neato](https://github.com/neatoqueen/NeatoJokers)
-            - [Cryptid](https://github.com/MathIsFun0/Cryptid) (with some minor issues - see [known issues](docs/known-issues.md))
+            - [Cryptid](https://github.com/MathIsFun0/Cryptid)
     - Incompatible mods:
-        - Mods that modify existing card names and effects are **not** compatible.
-        - The multiplayer mod has **not** been thoroughly tested and some users have reported crashes on past versions (that were hopefully fixed by the latest updates). 
+        - Mods that modify existing card effects are **not** compatible.
+    - Needs more testing:
+        - The [Balatro Multiplayer Mod](https://github.com/V-rtualized/BalatroMultiplayer) seems to be working well, but due to its unique aspects compared to other mods, it still needs more testing to be sure.
 
 - **Privacy**: This mod needs to upload data to the Slay the Jokers server (for details, see the `How It Works` section below). This includes **only game-related data** (such as card positions) - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
 
