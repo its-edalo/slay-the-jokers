@@ -50,7 +50,7 @@ def upload_to_server(upload_data, remote_filename, upload_key):
     files = {"file": (remote_filename, tmp_file)}
     payload = {"key": upload_key}
 
-    response = requests.post(UPLOAD_URL, files=files, data=payload)
+    response = requests.post(UPLOAD_URL, files=files, data=payload, timeout=5)
     if response.status_code != 200:
         print(f"Slay the Jokers Error: Failed to upload file: {response.text}", flush=True)
     else:
