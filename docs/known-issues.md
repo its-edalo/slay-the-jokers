@@ -8,11 +8,9 @@
 ## UI Elements
 
 - Tags and Boss Blinds are not hoverable
-- Sub-popups (describing keywords) are not implemented
 
 ## Mods
 
-- Modded card descriptions are not formatted or colored
 - Some Cryptid card titles are not shown correctly
 
 ## Codebase
