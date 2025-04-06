@@ -51,6 +51,11 @@ function encode_card(card)
         name = "?"
     else
         desc_args = card:get_description_table(is_modded)
+
+        -- perishanle
+        if (card.ability.perishable) then
+            data.s = {["p"] = card.ability.perish_tally}
+        end
     end
 
     -- name
@@ -88,11 +93,11 @@ function Game:stj_save()
             pack_cards = G.pack_cards,
             shop_vouchers = G.shop_vouchers,
         }
-        -- if G.your_collection then
-        --     for i, card_line in ipairs(G.your_collection) do
-        --         card_sources["collection_line" .. i] = card_line
-        --     end
-        -- end
+        if G.your_collection then
+            for i, card_line in ipairs(G.your_collection) do
+                card_sources["collection_line" .. i] = card_line
+            end
+        end
 
         local unsaved_card_sets = {Back = true, Default = true, Enhanced = true, Edition = true, Seal = true, Other = true}
 
