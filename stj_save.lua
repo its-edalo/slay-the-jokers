@@ -75,6 +75,20 @@ function encode_card(card)
     -- modded
     if (is_modded) then
         data.m = 1
+
+        if card.ability.set == "Joker" and card.config.center.rarity then
+            local rarity = card.config.center.rarity
+
+            local card_types = {"Common", "Uncommon", "Rare", "Legendary"}
+            if (card_types[rarity]) then
+                data.r = card_types[rarity]
+            else
+                local localized_rarity = localize("k_" .. rarity:lower())
+                if (localized_rarity ~= 'ERROR') then
+                    data.r = localized_rarity
+                end
+            end
+        end
     end
 
     return data
