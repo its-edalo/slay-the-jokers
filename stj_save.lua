@@ -1,4 +1,4 @@
-STJ_VERSION = "0.1.2"
+STJ_VERSION = "0.1.3"
 
 function is_encodable(card)
     if not card.ability or not card.ability.name or not card.ability.set then
