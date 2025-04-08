@@ -1,4 +1,4 @@
-STJ_VERSION = "0.1.2"
+STJ_VERSION = "0.1.3"
 
 function is_encodable(card)
     if not card.ability or not card.ability.name or not card.ability.set then
@@ -51,6 +51,11 @@ function encode_card(card)
         name = "?"
     else
         desc_args = card:get_description_table(is_modded)
+
+        -- perishanle
+        if (card.ability.perishable) then
+            data.s = {["p"] = card.ability.perish_tally}
+        end
     end
 
     -- name
@@ -70,6 +75,20 @@ function encode_card(card)
     -- modded
     if (is_modded) then
         data.m = 1
+
+        if card.ability.set == "Joker" and card.config.center.rarity then
+            local rarity = card.config.center.rarity
+
+            local card_types = {"Common", "Uncommon", "Rare", "Legendary"}
+            if (card_types[rarity]) then
+                data.r = card_types[rarity]
+            else
+                local localized_rarity = localize("k_" .. rarity:lower())
+                if (localized_rarity ~= 'ERROR') then
+                    data.r = localized_rarity
+                end
+            end
+        end
     end
 
     return data
@@ -88,11 +107,11 @@ function Game:stj_save()
             pack_cards = G.pack_cards,
             shop_vouchers = G.shop_vouchers,
         }
-        -- if G.your_collection then
-        --     for i, card_line in ipairs(G.your_collection) do
-        --         card_sources["collection_line" .. i] = card_line
-        --     end
-        -- end
+        if G.your_collection then
+            for i, card_line in ipairs(G.your_collection) do
+                card_sources["collection_line" .. i] = card_line
+            end
+        end
 
         local unsaved_card_sets = {Back = true, Default = true, Enhanced = true, Edition = true, Seal = true, Other = true}
 
