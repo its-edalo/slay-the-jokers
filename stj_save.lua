@@ -1,11 +1,11 @@
-STJ_VERSION = "0.1"
+STJ_VERSION = "0.1.2"
 
 function is_encodable(card)
     if not card.ability or not card.ability.name or not card.ability.set then
         return false
     end
 
-    if not card.config or not card.config.center_key then
+    if not card.config or not card.config.center or not card.config.center_key then
         return false
     end
 

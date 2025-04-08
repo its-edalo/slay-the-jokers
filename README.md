@@ -28,7 +28,7 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
 - **Other Mods & Compatibility**: This mod has only been partially tested alongside other Balatro mods.
     - Compatible mods:
         - Reskins, QoL mods, and other non-card-related mods should work in their entirety, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
-        -  Mods that add new cards should partially work - descriptions will appear, but they will not be properly formatted or colored. Among mods that were confirmed to work are:
+        -  Mods that add new cards should generally work, aside from some potential minor formatting quirks. Among mods that were confirmed to work are:
             - [Extra Credit](https://github.com/GuilloryCraft/ExtraCredit)
             - [Paperback](https://github.com/Balatro-Paperback/paperback)
             - [Neato](https://github.com/neatoqueen/NeatoJokers)
