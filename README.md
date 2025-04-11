@@ -25,6 +25,9 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
 
 - **Windows Only**: This mod currently supports only Windows systems.
 
+- **Stream Overlays**: This mod currently only works correctly if the game is shown at a 16:9 resolution (like 1920x1080 / 4K / 8K) and fills the entire visible area of the stream. Overlays that crop or reposition the game may cause card positions to misalign.
+    - If that's a dealbreaker, feel free to contact me - I might be able to make it work for your setup.
+
 - **Other Mods & Compatibility**: This mod has only been partially tested alongside other Balatro mods.
     - Compatible mods:
         - Reskins, QoL mods, and other non-card-related mods should work in their entirety, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
