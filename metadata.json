@@ -1,0 +1,11 @@
+{
+	"id": "SlayTheJokers",
+	"name": "Slay the Jokers",
+	"author": ["edalo"],
+	"description": "A companion mod for the Slay the Jokers Twitch extension",
+	"prefix": "stj",
+	"main_file": "steamodded.lua",
+	"priority": 0,
+	"version": "0.1.3a",
+	"dependencies": []
+}
