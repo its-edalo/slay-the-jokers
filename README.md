@@ -38,7 +38,7 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
     - Needs more testing:
         - The [Balatro Multiplayer Mod](https://github.com/V-rtualized/BalatroMultiplayer) seems to be working well, but due to its unique aspects compared to other mods, it still needs more testing to be sure.
 
-- **Privacy**: This mod needs to upload data to the Slay the Jokers server (for details, see the `How It Works` section below). This includes **only game-related data** (such as card positions) - no personal or private information is collected. You can verify this by checking out `stj_save.lua` and `stj_uploader.py`.
+- **Privacy**: This mod needs to upload data to the Slay the Jokers server (for details, see the `How It Works` section below). This includes **only game-related data** (such as card positions) - no personal or private information is collected. You can verify this by checking out `src/stj_save.lua` and `stj_uploader.py`.
 
 ## Installation
 
