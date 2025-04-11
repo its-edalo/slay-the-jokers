@@ -1,5 +1,5 @@
 [manifest]
-version = "0.1"
+version = "0.1.3a"
 dump_lua = true
 priority = 0
 
@@ -8,7 +8,7 @@ priority = 0
 target = "card.lua"
 position = "append"
 sources = [
-	"description.lua"
+	"src/description.lua"
 ]
 
 [[patches]]
@@ -35,7 +35,7 @@ match_indent = true
 target = "game.lua"
 position = "append"
 sources = [
-	"stj_save.lua"
+	"src/stj_save.lua"
 ]
 
 [[patches]]
