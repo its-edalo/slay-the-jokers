@@ -225,7 +225,7 @@ end
 
 function Card:get_popup_direction()
     if self.ability.set == 'Voucher' then
-        return 'r'
+        return 'l'
     end
     return (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'l' or
             (self.T.y < G.CARD_H*0.8) and 'b' or
