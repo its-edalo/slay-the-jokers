@@ -49,9 +49,11 @@ Before installing any mod, it's always smart to back up your game data.
 
 - Unzip the downloaded file.
 
-- Move the unzipped folder into the Mods folder located at `%appdata%\Balatro\Mods`, and rename it to `SlayTheJokers`
+- Move the unzipped folder into the Mods folder located at `%appdata%\Balatro\Mods`
 
-*Why?* This is the folder that Lovely injects mods from.
+- Rename the unzipped folder to `SlayTheJokers`
+
+*Why?* `%appdata%\Balatro\Mods` is the folder that Lovely injects mods from. The name of this mod's directory inside it needs to be `SlayTheJokers` so the uploading script can be ran.
 
 ## Step 5: Add Your Upload Key
 
