@@ -20,7 +20,7 @@ BALATRO_PATH = os.path.join(APPDATA_PATH, "Balatro")
 UPLOAD_KEY_PATH = os.path.join(BALATRO_PATH, "Mods", "SlayTheJokers", "upload.key")
 LIVE_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.json")
 REMOTE_LIVE_DATA_FILE_NAME = "live-data.json"
-UPLOAD_URL = "http://edalo.net/stj/upload"
+UPLOAD_URL = "https://edalo.net/stj/upload"
 UPLOAD_INTERVAL = 0.9
 MAX_UPLOAD_QUEUE_SIZE = 5
 
