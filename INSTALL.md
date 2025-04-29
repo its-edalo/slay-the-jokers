@@ -10,6 +10,8 @@ If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
 Before starting, contact me at `itsedalo@gmail.com` to receive an upload key file.  
 - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`.
+- Alternatively, you can get a key at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you).
+    - This feature is new; if something fails, fall back to emailing me.
 
 *Why?* Each streamer gets a unique key so their stream data stays separate. This prevents issues where one person's mod could interfere with another streamer's overlay.
 
