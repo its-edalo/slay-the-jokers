@@ -7,6 +7,8 @@
 
 A mod that allows your viewers to hover over cards on your stream to see their effects and current values.
 
+Does not require `steamodded`.
+
 <img alt="Slay the Jokers Preview Image 1" src="docs/preview1.png" />
 
 *(Screenshotted from [edzyttv](https://www.twitch.tv/edzyttv)'s stream, used with permission)*
