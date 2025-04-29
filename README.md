@@ -24,6 +24,8 @@ If you need help, have suggestions, or need an upload key, feel free to contact 
 
 - **Access Permissions**: Currently, in order to use this mod, you need permissions to upload to the Slay the Jokers server. **Contact me before installing** at `itsedalo@gmail.com` in order to receive an upload key.
     - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key.`, word for word if you want. I'll try to send you the key quickly.
+    - Alternatively, you can get a key at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you).
+        - This feature is new; if something fails, fall back to emailing me.
 
 - **Windows Only**: This mod currently supports only Windows systems.
 
