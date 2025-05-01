@@ -34,7 +34,7 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 - **Stream Overlays**: This mod currently only works correctly if the game is shown at a 16:9 resolution (like 1920x1080 / 4K / 8K) and **fills the entire visible area of the stream**. Overlays that crop or reposition the game may cause card positions to misalign.
     - If that's a dealbreaker, feel free to contact me - I might be able to make it work for your setup.
 
-- **Other Mods & Compatibility**: In theory, this mod should not interfere with most other mods.
+- **Other Mods & Compatibility**: This mod should be compatible with most other mods.
     - Compatible mods:
         - Reskins, QoL mods, and other non-card-related mods should work in their entirety, but have not been tested (except for the [Handy](https://github.com/SleepyG11/HandyBalatro) mod, which was confirmed to work).
         -  Mods that add new cards should generally work, aside from some potential minor formatting quirks. Among mods that were confirmed to work are [Extra Credit](https://github.com/GuilloryCraft/ExtraCredit), [Paperback](https://github.com/Balatro-Paperback/paperback), [Neato](https://github.com/neatoqueen/NeatoJokers), [Cryptid](https://github.com/MathIsFun0/Cryptid), and [The Balatro Multiplayer Mod](https://github.com/V-rtualized/BalatroMultiplayer).
