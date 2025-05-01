@@ -8,10 +8,11 @@ If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
 ## Pre-Step: Acquire Your Upload Key
 
-Before starting, you'll need an upload key to the Slay the Jokers server. You can get one in either of the following ways:
+Before starting, you'll need an `upload.key` file for the Slay the Jokers server. You can get one in either of the following ways:
 - Email me at `itsedalo@gmail.com` and ask for a key.
     - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`.
 - Use the automated system at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you).
+    - After clicking `Authorize`, wait until the file downloads.    
     - This feature is new; if anything goes wrong, just fall back to emailing me.
 
 *Why?* Each streamer gets a unique key so their stream data stays separate. This prevents issues where one person's mod could interfere with another streamer's overlay.
