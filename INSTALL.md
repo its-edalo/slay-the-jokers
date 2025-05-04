@@ -55,13 +55,11 @@ Before installing any mod, it's always smart to back up your game data.
 
 - Move the unzipped folder into the Mods folder located at `%appdata%\Balatro\Mods`
 
-- Rename the unzipped folder to `SlayTheJokers`
-
-*Why?* `%appdata%\Balatro\Mods` is the folder that Lovely injects mods from. The name of this mod's directory inside it needs to be `SlayTheJokers` so the uploading script can be ran.
+*Why?* `%appdata%\Balatro\Mods` is the folder that Lovely injects mods from.
 
 ## Step 5: Add Your Upload Key
 
-- Place the `upload.key` file you received in the pre-step into the mod's directory: `%appdata%\Balatro\Mods\SlayTheJokers`
+- Place the `upload.key` file you received in the pre-step into the mod's directory (`%appdata%\Balatro\Mods\slay-the-jokers-main` or similar)
 
 *Why?* This key tells the mod who you are, so it can safely upload data to the server folder linked to your Twitch stream.
 
@@ -80,8 +78,7 @@ Before installing any mod, it's always smart to back up your game data.
 **Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window.  
 
 **Debugging Errors**: If you get an error similar to:  
-- `Provide the path to an existing '.ps1' file` - make sure that you named the mod folder `SlayTheJokers`.
-- `Failed to get upload key` - make sure that you placed the `upload.key` file in the `SlayTheJokers` directory.
+- `Failed to get upload key` - make sure that you placed the `upload.key` file in the Slay the Jokers mod's directory.
 - `Failed to upload file` / `Invalid key` - the `upload.key` seems to be corrupted. Make sure that it's the right file, or request a new one.
 
 ## Step 7: Verify Everything Works!

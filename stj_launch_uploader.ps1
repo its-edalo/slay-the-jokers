@@ -1,4 +1,4 @@
-$modPath = "$env:APPDATA\Balatro\Mods\SlayTheJokers"
+$modPath = Get-ChildItem "$env:APPDATA\Balatro\Mods" -Directory | Where-Object { $_.Name -match "^Slay[-]?The[-]?Jokers" } | Select-Object -First 1 | ForEach-Object { $_.FullName }
 $uvxPath = Join-Path $modPath "uvx.exe"
 
 if (-Not (Test-Path $uvxPath)) {
