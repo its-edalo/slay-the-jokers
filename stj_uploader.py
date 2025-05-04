@@ -1,6 +1,6 @@
 import os
-import json
 import time
+import ctypes
 import psutil
 import requests
 import threading
@@ -32,6 +32,13 @@ def is_game_running():
 
 def get_upload_key():
     if not os.path.exists(UPLOAD_KEY_PATH):
+        message = (
+            "Slay the Jokers requires an upload key to function.\n\n"
+            "You can get one by logging in at:\n"
+            "https://edalo.net/stj/get-key\n"
+            "Then, move the key file to the same directory as this script."
+        )
+        ctypes.windll.user32.MessageBoxW(0, message, "Slay the Jokers - Missing Upload Key", 0x40 | 0x1)
         print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
         return None
 
