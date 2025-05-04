@@ -78,7 +78,7 @@ Before installing any mod, it's always smart to back up your game data.
 **Note:** The Python uploader is launched via a PowerShell script. It may change the size or font of the `Lovely` window.  
 
 **Debugging Errors**: If you get an error similar to:  
-- `Failed to get upload key` - make sure that you placed the `upload.key` file in the Slay the Joker mod's directory.
+- `Failed to get upload key` - make sure that you placed the `upload.key` file in the Slay the Jokers mod's directory.
 - `Failed to upload file` / `Invalid key` - the `upload.key` seems to be corrupted. Make sure that it's the right file, or request a new one.
 
 ## Step 7: Verify Everything Works!
