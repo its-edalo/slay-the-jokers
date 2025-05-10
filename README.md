@@ -29,7 +29,8 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
     - Use the automated system at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you).
         - This feature is new; if anything goes wrong, just fall back to emailing me.
 
-- **Windows Only**: This mod currently supports only **\*Windows\*** systems.
+- **Windows and Steam only**: This mod supports only the **Steam** version of the game on **Windows**.
+    - The Xbox Game Pass PC version is not supported as it is incompatible with the required `Lovely` injector.
 
 - **Stream Overlays**: This mod currently only works correctly if the game is shown at a 16:9 resolution (like 1920x1080 / 4K / 8K) and **fills the entire visible area of the stream**. Overlays that crop or reposition the game may cause card positions to misalign.
     - If that's a dealbreaker, feel free to contact me - I might be able to make it work for your setup.
