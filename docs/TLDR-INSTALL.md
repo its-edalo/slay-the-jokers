@@ -14,7 +14,7 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 5. Unzip it and move the `version.dll` file into the Balatro installation folder (where `Balatro.exe` is)
 6. Download [this mod](https://github.com/its-edalo/slay-the-jokers/archive/main.zip)
 7. Unzip it and move the unzipped folder into `%appdata%\Balatro\Mods` (create the `Mods` directory if it doesn't exist)
-8. Place `upload.key` in the folder you created (`%appdata%\Balatro\Mods\slay-the-jokers-main` or similar)
+8. Place `upload.key` in the folder you moved (`%appdata%\Balatro\Mods\slay-the-jokers-main` or similar)
 9. Launch Balatro and wait for it to fully load.  
     - A black command window (part of `Lovely`) will appear
     - On first launch, it will automatically install required tools for this mod
