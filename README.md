@@ -45,3 +45,12 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 
 - **Disclaimer**: This mod is still under development, so some features might not work perfectly. If you encounter any issues, please let me know!
     - *More formal disclaimer for meanies: this project is a hobby project, provided as-is, with no guarantees of stability, correctness, or suitability for any purpose. You're welcome to use it - but I take no responsibility if something goes wrong.*
+
+## Acknowledgments
+
+Big Thank Yous to all the following people:
+
+- [@tusharsadhwani](https://github.com/tusharsadhwani) for the suggestion and implementation of the `uv` package manager usage
+- [@yotka2](https://github.com/yotka2) for helping with the server setup and maintenance
+- [@espav](https://twitch.tv/espav) for being the extension's first tester and providing invaluable feedback
+- [@edzy](https://twitch.tv/edzyttv) for helping debug the mod and lending his face to the extension's cover image
