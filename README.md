@@ -54,3 +54,4 @@ Big Thank Yous to all the following people:
 - [@yotka2](https://github.com/yotka2) for helping with the server setup and maintenance
 - [@espav](https://twitch.tv/espav) for being the extension's first tester and providing invaluable feedback
 - [@edzy](https://twitch.tv/edzyttv) for helping debug the mod and lending his face to the extension's cover image
+- [@Boop Dog](https://github.com/goBoopADog) for creating the mod's Balatro Mod Index page
