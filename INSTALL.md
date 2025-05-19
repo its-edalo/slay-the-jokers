@@ -6,6 +6,8 @@ This guide will help you set up the Slay the Jokers Mod. Each step is explained 
 
 If you need help or have suggestions, contact me at `itsedalo@gmail.com`.
 
+*If you got here from from the Balatro Mod Manager, you can skip to Step 5.*
+
 ## Pre-Step: Acquire Your Upload Key
 
 Before starting, you'll need an `upload.key` file for the Slay the Jokers server. You can get one in either of the following ways:
