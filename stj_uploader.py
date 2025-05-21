@@ -17,7 +17,9 @@ UPLOAD_DELAY = 0.7
 GAME_PROCESS_NAME = "Balatro.exe"
 APPDATA_PATH = os.getenv("APPDATA")
 BALATRO_PATH = os.path.join(APPDATA_PATH, "Balatro")
-UPLOAD_KEY_PATH = os.path.join(os.path.dirname(__file__), "upload.key")
+UPLOAD_KEY_FILENAME = "upload.key"
+UPLOAD_KEY_PATH = os.path.join(BALATRO_PATH, UPLOAD_KEY_FILENAME)
+UPLOAD_KEY_LEGACY_PATH = os.path.join(os.path.dirname(__file__), UPLOAD_KEY_FILENAME)
 LIVE_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.json")
 REMOTE_LIVE_DATA_FILE_NAME = "live-data.json"
 UPLOAD_URL = "https://edalo.net/stj/upload"
@@ -31,12 +33,16 @@ def is_game_running():
     return any(GAME_PROCESS_NAME.lower() in process.info["name"].lower() for process in psutil.process_iter(attrs=["name"]))
 
 def get_upload_key():
+    upload_key_path = UPLOAD_KEY_PATH
     if not os.path.exists(UPLOAD_KEY_PATH):
-        print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
-        return None
+        if os.path.exists(UPLOAD_KEY_LEGACY_PATH):
+            upload_key_path = UPLOAD_KEY_LEGACY_PATH
+        else:
+            print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
+            return None
 
     try:
-        with open(UPLOAD_KEY_PATH, "r") as f:
+        with open(upload_key_path, "r") as f:
             return f.read().strip()
     except Exception as e:
         print(f"Slay the Jokers Error: Failed to read upload key file: {e}")
