@@ -40,7 +40,7 @@ def get_upload_key():
         else:
             print(f"Slay the Jokers Error: Upload key file not found: {UPLOAD_KEY_PATH}")
             return None
-    
+
     try:
         with open(upload_key_path, "r") as f:
             return f.read().strip()
