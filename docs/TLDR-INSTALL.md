@@ -5,11 +5,10 @@ If you need detailed instructions, explanations, or steps to back up your save, 
 
 ## Instructions
 
-1. Acquire an `upload.key` file using **one** of the following methods:
-    - Email me at `itsedalo@gmail.com`
+1. Acquire an `upload.key` file
+    - Get one automatically at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you)
+        - If something goes wrong or you prefer not to authorize, you can request a key at `itsedalo@gmail.com`
         - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`
-    - Use the automated system at https://edalo.net/stj/get-key (you will need to verify your Twitch account to prove it's really you)
-        - This feature is new; if something fails, fall back to emailing me
 4. Download [Lovely](https://www.github.com/ethangreen-dev/lovely-injector/releases/tag/v0.7.1) 
 5. Unzip it and move the `version.dll` file into the Balatro installation folder (where `Balatro.exe` is)
 6. Download [this mod](https://github.com/its-edalo/slay-the-jokers/archive/main.zip)
