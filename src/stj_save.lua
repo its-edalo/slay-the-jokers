@@ -1,4 +1,16 @@
-STJ_VERSION = "0.1.3a"
+STJ_VERSION = "0.1.3b"
+
+function can_stj_save()
+    if not G.ROOM or not G.ROOM.T or not G.ROOM.T.x or not G.ROOM.T.y then
+        return false
+    end
+
+    if not G.TILESCALE or not G.TILESIZE then
+        return false
+    end
+
+    return true
+end
 
 function is_encodable(card)
     if not card.ability or not card.ability.name or not card.ability.set then
@@ -20,7 +32,19 @@ function is_encodable(card)
     return true
 end
 
-function encode_card(card)
+function get_encoded_card_positions(card, x_to_percent_factor, y_to_percent_factor)
+    local x_stream_alignment_offset = 0
+    local y_stream_alignment_offset = -0.05
+
+    local x = string.format("%.3f", x_to_percent_factor * (card.T.x + G.ROOM.T.x + x_stream_alignment_offset))
+    local y = string.format("%.3f", y_to_percent_factor * (card.T.y + G.ROOM.T.y + y_stream_alignment_offset))
+    local w = string.format("%.3f", x_to_percent_factor * card.T.w)
+    local h = string.format("%.3f", y_to_percent_factor * card.T.h)
+
+    return x, y, w, h
+end
+
+function encode_card(card, x_to_percent_factor, y_to_percent_factor)
     local data = {}
     local is_modded = false
     local desc_args = nil
@@ -58,13 +82,11 @@ function encode_card(card)
         end
     end
 
+
     -- name
     data.n = name
     -- position and size
-    data.x = string.format("%.3f", 5.4 + card.T.x * 4.4)
-    data.y = string.format("%.3f", 4 + card.T.y * 7.822)
-    data.w = string.format("%.3f", card.T.w * 4.4)
-    data.h = string.format("%.3f", card.T.h * 7.822)
+    data.x, data.y, data.w, data.h = get_encoded_card_positions(card, x_to_percent_factor, y_to_percent_factor)
 
     -- popup direction
     data.p = card:get_popup_direction()
@@ -95,8 +117,13 @@ function encode_card(card)
 end
 
 function Game:stj_save()
-    if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
+    if (not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5) and can_stj_save() then
         G.last_stj_save = G.TIMERS.UPTIME
+
+        local dim_width, dim_height = love.graphics.getDimensions()
+        local screen_scale = G.TILESCALE * G.TILESIZE
+        local x_to_percent_factor = 100 * screen_scale / dim_width
+        local y_to_percent_factor = 100 * screen_scale / dim_height
 
         local live_data = {}
         local card_data = {}
@@ -119,7 +146,7 @@ function Game:stj_save()
             if source and source.cards then
                 for _, v in pairs(source.cards) do
                     if v.ability and not unsaved_card_sets[v.ability.set] then
-                        local encoded_card = encode_card(v)
+                        local encoded_card = encode_card(v, x_to_percent_factor, y_to_percent_factor)
                         if encoded_card then
                             table.insert(card_data, encoded_card)
                         end
