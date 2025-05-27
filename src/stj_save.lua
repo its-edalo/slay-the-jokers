@@ -32,19 +32,40 @@ function is_encodable(card)
     return true
 end
 
-function get_encoded_card_positions(card, x_to_percent_factor, y_to_percent_factor)
+function get_encoded_card_positions(card, game_width, game_height)
+    -- Change this to "TOP" if you align the stream to the top of the screen
+    local STREAM_POSITION = "MIDDLE"
+
     local x_stream_alignment_offset = 0
     local y_stream_alignment_offset = -0.05
 
-    local x = string.format("%.3f", x_to_percent_factor * (card.T.x + G.ROOM.T.x + x_stream_alignment_offset))
-    local y = string.format("%.3f", y_to_percent_factor * (card.T.y + G.ROOM.T.y + y_stream_alignment_offset))
-    local w = string.format("%.3f", x_to_percent_factor * card.T.w)
-    local h = string.format("%.3f", y_to_percent_factor * card.T.h)
+    local screen_scale = G.TILESCALE * G.TILESIZE
+    local x_to_percent_factor = 100 * screen_scale / game_width
+    local y_to_percent_factor = 100 * screen_scale / game_height
 
+    local unscaled_x = x_to_percent_factor * (card.T.x + G.ROOM.T.x + x_stream_alignment_offset)
+    local unscaled_y = y_to_percent_factor * (card.T.y + G.ROOM.T.y + y_stream_alignment_offset)
+    local unscaled_w = x_to_percent_factor * card.T.w
+    local unscaled_h = y_to_percent_factor * card.T.h
+
+    local scaled_stream_height = (game_height / game_width) * (1920 / 1080)
+    local scaled_h = unscaled_h * scaled_stream_height
+
+    local scaled_y = unscaled_y
+    if STREAM_POSITION == "TOP" then
+        scaled_y = unscaled_y * scaled_stream_height
+    else
+        scaled_y = unscaled_y * scaled_stream_height + 100 * (1 - scaled_stream_height) / 2
+    end
+
+    local x = string.format("%.3f", unscaled_x)
+    local y = string.format("%.3f", scaled_y)
+    local w = string.format("%.3f", unscaled_w)
+    local h = string.format("%.3f", scaled_h)
     return x, y, w, h
 end
 
-function encode_card(card, x_to_percent_factor, y_to_percent_factor)
+function encode_card(card, game_width, game_height)
     local data = {}
     local is_modded = false
     local desc_args = nil
@@ -86,7 +107,7 @@ function encode_card(card, x_to_percent_factor, y_to_percent_factor)
     -- name
     data.n = name
     -- position and size
-    data.x, data.y, data.w, data.h = get_encoded_card_positions(card, x_to_percent_factor, y_to_percent_factor)
+    data.x, data.y, data.w, data.h = get_encoded_card_positions(card, game_width, game_height)
 
     -- popup direction
     data.p = card:get_popup_direction()
@@ -120,10 +141,7 @@ function Game:stj_save()
     if (not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5) and can_stj_save() then
         G.last_stj_save = G.TIMERS.UPTIME
 
-        local dim_width, dim_height = love.graphics.getDimensions()
-        local screen_scale = G.TILESCALE * G.TILESIZE
-        local x_to_percent_factor = 100 * screen_scale / dim_width
-        local y_to_percent_factor = 100 * screen_scale / dim_height
+        local game_width, game_height = love.graphics.getDimensions()
 
         local live_data = {}
         local card_data = {}
@@ -146,7 +164,7 @@ function Game:stj_save()
             if source and source.cards then
                 for _, v in pairs(source.cards) do
                     if v.ability and not unsaved_card_sets[v.ability.set] then
-                        local encoded_card = encode_card(v, x_to_percent_factor, y_to_percent_factor)
+                        local encoded_card = encode_card(v, game_width, game_height)
                         if encoded_card then
                             table.insert(card_data, encoded_card)
                         end
