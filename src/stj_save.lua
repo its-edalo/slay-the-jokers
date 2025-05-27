@@ -33,8 +33,8 @@ function is_encodable(card)
 end
 
 function get_encoded_card_positions(card, game_width, game_height)
-    -- Change this to "TOP" if you align the stream to the top of the screen
-    local STREAM_POSITION = "MIDDLE"
+    -- Options: "TOP", "CENTER", "CROPPED_CENTER"
+    local STREAM_POSITION = "CENTER"
 
     local x_stream_alignment_offset = 0
     local y_stream_alignment_offset = -0.05
@@ -48,20 +48,32 @@ function get_encoded_card_positions(card, game_width, game_height)
     local unscaled_w = x_to_percent_factor * card.T.w
     local unscaled_h = y_to_percent_factor * card.T.h
 
-    local scaled_stream_height = (game_height / game_width) * (1920 / 1080)
-    local scaled_h = unscaled_h * scaled_stream_height
+    local x, y, w, h
 
-    local scaled_y = unscaled_y
-    if STREAM_POSITION == "TOP" then
-        scaled_y = unscaled_y * scaled_stream_height
+    if STREAM_POSITION == "CROPPED_CENTER" then
+        local stream_width_scaler = (game_width / game_height) * (1080 / 1920)
+        local scaled_x = unscaled_x * stream_width_scaler - 100 * (stream_width_scaler - 1) / 2
+        local scaled_w = unscaled_w * stream_width_scaler
+
+        x = string.format("%.3f", scaled_x)
+        y = string.format("%.3f", unscaled_y)
+        w = string.format("%.3f", scaled_w)
+        h = string.format("%.3f", unscaled_h)
     else
-        scaled_y = unscaled_y * scaled_stream_height + 100 * (1 - scaled_stream_height) / 2
+        local stream_height_scaler = (game_height / game_width) * (1920 / 1080)
+        local scaled_h = unscaled_h * stream_height_scaler
+
+        local scaled_y = unscaled_y * stream_height_scaler
+        if STREAM_POSITION == "CENTER" then
+            scaled_y = scaled_y + 100 * (1 - stream_height_scaler) / 2
+        end
+
+        x = string.format("%.3f", unscaled_x)
+        y = string.format("%.3f", scaled_y)
+        w = string.format("%.3f", unscaled_w)
+        h = string.format("%.3f", scaled_h)
     end
 
-    local x = string.format("%.3f", unscaled_x)
-    local y = string.format("%.3f", scaled_y)
-    local w = string.format("%.3f", unscaled_w)
-    local h = string.format("%.3f", scaled_h)
     return x, y, w, h
 end
 
