@@ -36,8 +36,8 @@ function get_encoded_card_positions(card, game_width, game_height)
     -- Options: "TOP", "CENTER", "CROPPED_CENTER"
     local STREAM_POSITION = "CENTER"
 
-    local x_stream_alignment_offset = 0
-    local y_stream_alignment_offset = -0.05
+    local x_stream_alignment_offset = -0.2
+    local y_stream_alignment_offset = -0.2
 
     local screen_scale = G.TILESCALE * G.TILESIZE
     local x_to_percent_factor = 100 * screen_scale / game_width
