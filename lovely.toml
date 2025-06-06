@@ -90,4 +90,3 @@ payload = '''    if G.DENY_DYNAMIC_TEXT then
     end
 '''
 match_indent = true
-

@@ -94,9 +94,48 @@ function encode_card(card)
     return data
 end
 
+function can_change_shop_text()
+    if not G.SHOP_SIGN or not G.SHOP_SIGN.definition or not G.SHOP_SIGN.definition.nodes then
+        return false
+    end
+
+    if  #G.SHOP_SIGN.definition.nodes < 1 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes or
+        #G.SHOP_SIGN.definition.nodes[1].nodes < 2 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes or
+        #G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes < 1 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config then
+        return false
+    end
+
+    local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+    if not shop_text_object or not shop_text_object.config or not shop_text_object.config.string then
+        return false
+    end
+
+    return true
+end
+
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
+        if can_change_shop_text() then
+            local shop_text = "Improve your run!"
+            local content, _ = love.filesystem.read("shop_text.txt")
+            if content then
+                shop_text = content
+            end
+            local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+            shop_text_object.config.string = {{string=shop_text,ref_table={}}}
+            shop_text_object.scale = 0.4
+            -- if #shop_text <= 14 then
+            --     shop_text_object.scale = 0.5
+            -- else
+            --     shop_text_object.scale = 0.4 * (14 / #shop_text)
+            -- end
+            shop_text_object:update()
+        end
+
 
         local live_data = {}
         local card_data = {}

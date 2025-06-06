@@ -8,6 +8,9 @@ import collections
 from io import BytesIO
 from datetime import datetime
 
+# You can find your streamer ID at `https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/`
+streamer_id = "your_streamer_id_here"
+
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
 # Not recommended to go above 3.5
@@ -21,6 +24,7 @@ UPLOAD_KEY_FILENAME = "upload.key"
 UPLOAD_KEY_PATH = os.path.join(BALATRO_PATH, UPLOAD_KEY_FILENAME)
 UPLOAD_KEY_LEGACY_PATH = os.path.join(os.path.dirname(__file__), UPLOAD_KEY_FILENAME)
 LIVE_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.json")
+SHOP_TEXT_FILE_PATH = os.path.join(BALATRO_PATH, "shop_text.txt")
 REMOTE_LIVE_DATA_FILE_NAME = "live-data.json"
 UPLOAD_URL = "https://edalo.net/stj/upload"
 UPLOAD_INTERVAL = 0.9
@@ -109,6 +113,26 @@ def uploader_thread(upload_key):
     print("Slay the Jokers: Uploader thread exiting...", flush=True)
     return
 
+def process_jokers_slay_back_data():
+    if streamer_id == "your_streamer_id_here":
+        return
+    try:
+        response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
+        if response.status_code != 200:
+            print(f"Warning: Failed to fetch Jokers Slay Back data: received status code {response.status_code}")
+            return
+        else:
+            content = "Thank you, " + response.text.strip()
+        if len(content) > 50:
+            print(f"Warning: Jokers Slay Back data too long ({len(content)} bytes), not saving.")
+            content = "Improve your shop!"
+
+        with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+    except requests.exceptions.RequestException as e:
+        print(f"Warning: Failed to fetch Jokers Slay Back data: {e}")
+
 def main():
     if UPLOAD_INTERVAL * MAX_UPLOAD_QUEUE_SIZE <= UPLOAD_DELAY:
         print("Slay the Jokers Error: Chosen upload delay is too high")
@@ -136,6 +160,7 @@ def main():
         if not is_game_running():
             print("Game closed. Slay the Jokers is exiting...")
             break
+        process_jokers_slay_back_data()
         time.sleep(1)
 
     return
