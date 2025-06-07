@@ -1,3 +1,4 @@
+import re
 import os
 import json
 import time
@@ -8,6 +9,9 @@ import collections
 from io import BytesIO
 from datetime import datetime
 
+# Change these to your desired shop text
+DEFAULT_SHOP_TEXT = "Improve your shop!"
+SUB_SHOP_TEXT = "Thank you, {username}"
 # You can find your streamer ID at `https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/`
 streamer_id = "your_streamer_id_here"
 
@@ -115,25 +119,30 @@ def uploader_thread(upload_key):
 
 def process_jokers_slay_back_data():
     try:
-        default_shop_text = "Improve your shop!"
         if streamer_id == "your_streamer_id_here":
-            content = default_shop_text
-        else:
-            response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
-            if response.status_code != 200:
-                print(f"Warning: Failed to fetch Jokers Slay Back data: received status code {response.status_code}")
-                content = default_shop_text
-            else:
-                content = "Thank you, " + response.text.strip()
-                if len(content) > 50:
-                    print(f"Warning: Jokers Slay Back data too long ({len(content)} bytes), not saving.")
-                    content = default_shop_text
+            return DEFAULT_SHOP_TEXT
 
-        with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
-            f.write(content)
+        response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
+        if response.status_code != 200:
+            print(f"Jokers Slay Back Warning: Failed to fetch data: Received status code {response.status_code}")
+            return DEFAULT_SHOP_TEXT
+
+        username = response.text.strip()
+        if not re.fullmatch(r"[a-zA-Z0-9_]{4,25}", username):
+            print(f"Jokers Slay Back Warning: Suspicious username detected: '{username}'")
+            return DEFAULT_SHOP_TEXT
+
+        content = SUB_SHOP_TEXT.format(username=username)
+        return content
 
     except requests.exceptions.RequestException as e:
-        print(f"Warning: Failed to fetch Jokers Slay Back data: {e}")
+        print(f"Jokers Slay Back Warning: Failed to fetch data: {e}")
+        return DEFAULT_SHOP_TEXT
+
+def save_jokers_slay_back_data():
+    content = process_jokers_slay_back_data()
+    with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
+        f.write(content)
 
 def main():
     if UPLOAD_INTERVAL * MAX_UPLOAD_QUEUE_SIZE <= UPLOAD_DELAY:
@@ -162,7 +171,7 @@ def main():
         if not is_game_running():
             print("Game closed. Slay the Jokers is exiting...")
             break
-        process_jokers_slay_back_data()
+        save_jokers_slay_back_data()
         time.sleep(1)
 
     return
