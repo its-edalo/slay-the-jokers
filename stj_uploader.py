@@ -114,18 +114,20 @@ def uploader_thread(upload_key):
     return
 
 def process_jokers_slay_back_data():
-    if streamer_id == "your_streamer_id_here":
-        return
     try:
-        response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
-        if response.status_code != 200:
-            print(f"Warning: Failed to fetch Jokers Slay Back data: received status code {response.status_code}")
-            return
+        default_shop_text = "Improve your shop!"
+        if streamer_id == "your_streamer_id_here":
+            content = default_shop_text
         else:
-            content = "Thank you, " + response.text.strip()
-        if len(content) > 50:
-            print(f"Warning: Jokers Slay Back data too long ({len(content)} bytes), not saving.")
-            content = "Improve your shop!"
+            response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
+            if response.status_code != 200:
+                print(f"Warning: Failed to fetch Jokers Slay Back data: received status code {response.status_code}")
+                content = default_shop_text
+            else:
+                content = "Thank you, " + response.text.strip()
+                if len(content) > 50:
+                    print(f"Warning: Jokers Slay Back data too long ({len(content)} bytes), not saving.")
+                    content = default_shop_text
 
         with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
             f.write(content)
