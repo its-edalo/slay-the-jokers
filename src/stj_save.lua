@@ -126,14 +126,16 @@ function Game:stj_save()
                 shop_text = content
             end
             local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+            if not G.ORIGINAL_SHOP_TEXT_WIDTH then
+                G.ORIGINAL_SHOP_TEXT_WIDTH = shop_text_object.config.W
+            end
             shop_text_object.config.string = {{string=shop_text,ref_table={}}}
-            shop_text_object.scale = 0.4
-            -- if #shop_text <= 14 then
-            --     shop_text_object.scale = 0.5
-            -- else
-            --     shop_text_object.scale = 0.4 * (14 / #shop_text)
-            -- end
-            shop_text_object:update()
+            shop_text_object:update_text()
+            shop_text_object:align_letters()
+            shop_text_object.scale = shop_text_object.scale * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+            shop_text_object.config.spacing = shop_text_object.config.spacing * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+            shop_text_object:update_text(true)
+            shop_text_object:align_letters()
         end
 
 
@@ -156,11 +158,16 @@ function Game:stj_save()
 
         for _, source in pairs(card_sources) do
             if source and source.cards then
+                local encoded_count = 0
                 for _, v in pairs(source.cards) do
+                    if encoded_count >= 50 then
+                        break
+                    end
                     if v.ability and not unsaved_card_sets[v.ability.set] then
                         local encoded_card = encode_card(v)
                         if encoded_card then
                             table.insert(card_data, encoded_card)
+                            encoded_count = encoded_count + 1
                         end
                     end
                 end
