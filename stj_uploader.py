@@ -9,6 +9,8 @@ import collections
 from io import BytesIO
 from datetime import datetime
 
+# Set to False to disable Jokers Slay Back functionality
+JOKERS_SLAY_BACK_ENABLED = True
 # Change these to your desired shop text
 DEFAULT_SHOP_TEXT = "Improve your shop!"
 SUB_SHOP_TEXT = "Thank you, {username}"
@@ -140,7 +142,10 @@ def process_jokers_slay_back_data():
         return DEFAULT_SHOP_TEXT
 
 def save_jokers_slay_back_data():
-    content = process_jokers_slay_back_data()
+    if JOKERS_SLAY_BACK_ENABLED:
+        content = process_jokers_slay_back_data()
+    else:
+        content = DEFAULT_SHOP_TEXT
     with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
         f.write(content)
 
