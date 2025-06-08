@@ -116,26 +116,32 @@ function can_change_shop_text()
     return true
 end
 
+function change_shop_text(new_text)
+    local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+    if not G.ORIGINAL_SHOP_TEXT_WIDTH then
+        G.ORIGINAL_SHOP_TEXT_WIDTH = shop_text_object.config.W
+    end
+    local previous_text = shop_text_object.string
+    if new_text == previous_text then
+        return
+    end
+    shop_text_object.config.string = {{string=new_text,ref_table={}}}
+    shop_text_object:update_text()
+    shop_text_object:align_letters()
+    shop_text_object.scale = shop_text_object.scale * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+    shop_text_object.config.spacing = shop_text_object.config.spacing * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+    shop_text_object:update_text(true)
+    shop_text_object:align_letters()
+end
+
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
-        if can_change_shop_text() then
-            local shop_text = "Improve your run!"
-            local content, _ = love.filesystem.read("shop_text.txt")
-            if content then
-                shop_text = content
+        if G.JSB_MANAGER and can_change_shop_text() then
+            local shop_text = G.JSB_MANAGER.channel:pop()
+            if shop_text and shop_text ~= "" then
+                change_shop_text(shop_text)
             end
-            local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
-            if not G.ORIGINAL_SHOP_TEXT_WIDTH then
-                G.ORIGINAL_SHOP_TEXT_WIDTH = shop_text_object.config.W
-            end
-            shop_text_object.config.string = {{string=shop_text,ref_table={}}}
-            shop_text_object:update_text()
-            shop_text_object:align_letters()
-            shop_text_object.scale = shop_text_object.scale * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
-            shop_text_object.config.spacing = shop_text_object.config.spacing * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
-            shop_text_object:update_text(true)
-            shop_text_object:align_letters()
         end
 
 

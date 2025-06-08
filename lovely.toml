@@ -46,7 +46,6 @@ pattern = '''boot_timer('savemanager', 'shaders',0.4)
 position = "after"
 payload = '''    G.STJ_MANAGER = {
         thread = love.thread.newThread([[require "love.system" 
-
 require "love.timer"
 require "love.thread"
 require 'love.filesystem'
@@ -65,6 +64,28 @@ end
         channel = love.thread.getChannel('save_stj_data')
     }
     G.STJ_MANAGER.thread:start()
+    G.JSB_MANAGER = {
+        thread = love.thread.newThread([[require "love.timer"
+require "love.thread"
+require "love.filesystem"
+
+local channel = love.thread.getChannel("load_jsb_data")
+
+while true do
+    if love.filesystem.getInfo("shop_text.txt") then
+        local content = love.filesystem.read("shop_text.txt")
+        if content then
+            channel:clear()
+            channel:push(content)
+        end
+    end
+    love.timer.sleep(1)
+end
+]]),
+    channel = love.thread.getChannel("load_jsb_data")
+}
+
+    G.JSB_MANAGER.thread:start()
 '''
 match_indent = true
 

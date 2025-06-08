@@ -12,7 +12,7 @@ from datetime import datetime
 # Set to False to disable Jokers Slay Back functionality
 JOKERS_SLAY_BACK_ENABLED = True
 # Change these to your desired shop text
-DEFAULT_SHOP_TEXT = "Improve your shop!"
+DEFAULT_SHOP_TEXT = "Improve your run!"
 SUB_SHOP_TEXT = "Thank you, {username}"
 # You can find your streamer ID at `https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/`
 streamer_id = "your_streamer_id_here"
