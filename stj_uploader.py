@@ -137,8 +137,8 @@ def process_jokers_slay_back_data():
         content = SUB_SHOP_TEXT.format(username=username)
         return content
 
-    except requests.exceptions.RequestException as e:
-        print(f"Jokers Slay Back Warning: Failed to fetch data: {e}")
+    except requests.exceptions.RequestException:
+        print(f"Jokers Slay Back Warning: Failed to fetch data")
         return DEFAULT_SHOP_TEXT
 
 def save_jokers_slay_back_data():
