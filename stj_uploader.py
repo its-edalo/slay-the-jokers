@@ -15,7 +15,7 @@ JOKERS_SLAY_BACK_ENABLED = True
 DEFAULT_SHOP_TEXT = "Improve your run!"
 SUB_SHOP_TEXT = "Thank you, {username}"
 # You can find your streamer ID at `https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/`
-streamer_id = "your_streamer_id_here"
+streamer_id = "38618236"
 
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
