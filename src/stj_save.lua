@@ -1,4 +1,5 @@
-STJ_VERSION = "0.1.3a"
+STJ_VERSION = "0.2"
+MAX_ENCODED_CARDS_PER_SOURCE = 50
 
 function is_encodable(card)
     if not card.ability or not card.ability.name or not card.ability.set then
@@ -18,6 +19,45 @@ function is_encodable(card)
     end
 
     return true
+end
+
+function get_card_stickers(card)
+    local stickers = {}
+
+    -- perishanle
+    if (card.ability.perishable) then
+        stickers["p"] = card.ability.perish_tally
+    end
+
+    -- rental
+    if (card.ability.rental) then
+        stickers["r"] = 1
+    end
+
+    -- eternal
+    if (card.ability.eternal) then
+        stickers["e"] = 1
+    end
+
+    return stickers
+end
+
+function get_card_edition(card)
+    if not card.edition then
+        return nil
+    end
+
+    if card.edition.holo then
+        return "h"
+    elseif card.edition.foil then
+        return "f"
+    elseif card.edition.polychrome then
+        return "p"
+    elseif card.edition.negative then
+        return "n"
+    end
+
+    return nil
 end
 
 function encode_card(card)
@@ -50,12 +90,20 @@ function encode_card(card)
     if card.facing and card.facing =='back' then
         name = "?"
     else
-        desc_args = card:get_description_table(is_modded)
+        local stickers = get_card_stickers(card)
 
-        -- perishanle
-        if (card.ability.perishable) then
-            data.s = {["p"] = card.ability.perish_tally}
+        if stickers and next(stickers) then
+            -- stickers
+            data.s = stickers
         end
+
+        local edition = get_card_edition(card)
+        if edition then
+            -- edition
+            data.e = edition
+        end
+
+        desc_args = card:get_description_table(is_modded)
     end
 
     -- name
@@ -94,6 +142,44 @@ function encode_card(card)
     return data
 end
 
+function can_get_run_info()
+    return G.GAME and G.GAME.hands
+end
+
+function get_run_info()
+    local run_info = {}
+    local possible_hands = {
+        "Flush Five",
+        "Flush House",
+        "Five of a Kind",
+        "Straight Flush",
+        "Four of a Kind",
+        "Full House",
+        "Flush",
+        "Straight",
+        "Three of a Kind",
+        "Two Pair",
+        "Pair",
+        "High Card"
+    }
+
+    run_info.h = {}
+
+    for index, handname in ipairs(possible_hands) do
+        local hand = G.GAME.hands[handname]
+        if hand then
+            run_info.h[index] = {
+                ["l"] = hand.level,
+                ["c"] = hand.chips,
+                ["m"] = hand.mult,
+                ["p"] = hand.played
+            }
+        end
+    end
+
+    return run_info
+end
+
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
@@ -117,11 +203,16 @@ function Game:stj_save()
 
         for _, source in pairs(card_sources) do
             if source and source.cards then
+                local encoded_count = 0
                 for _, v in pairs(source.cards) do
+                    if encoded_count >= MAX_ENCODED_CARDS_PER_SOURCE then
+                        break
+                    end
                     if v.ability and not unsaved_card_sets[v.ability.set] then
                         local encoded_card = encode_card(v)
                         if encoded_card then
                             table.insert(card_data, encoded_card)
+                            encoded_count = encoded_count + 1
                         end
                     end
                 end
@@ -130,6 +221,13 @@ function Game:stj_save()
 
         live_data.v = STJ_VERSION
         live_data.c = card_data
+
+        if can_get_run_info() then
+            local run_info = get_run_info()
+            if run_info then
+                live_data.r = run_info
+            end
+        end
 
         G.STJ_MANAGER.channel:push({
             type = 'save_stj_data',
