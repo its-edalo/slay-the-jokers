@@ -54,7 +54,11 @@ function get_card_edition(card)
     elseif card.edition.polychrome then
         return "p"
     elseif card.edition.negative then
-        return "n"
+        if card.ability.consumeable then
+            return "nc"
+        else
+            return "n"
+        end
     end
 
     return nil
