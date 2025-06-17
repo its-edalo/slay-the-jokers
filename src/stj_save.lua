@@ -66,34 +66,23 @@ end
 
 function encode_card(card)
     local data = {}
-    local is_modded = false
-    local desc_args = nil
+    local name = nil
 
     if not is_encodable(card) then
         return nil
     end
 
-    local name = card.ability.name
-    if card:is_modded() then
-        is_modded = true
-        local localization_set = G.localization.descriptions[card.ability.set]
-        if localization_set and card.config.center_key then
-            local localization_desc = localization_set[card.config.center_key]
-            if localization_desc and localization_desc.name then
-                name = localization_desc.name
-            end
-        end
-    end
-
-    if name == "Riff-raff" then
-        name = "Riff-Raff"
-    elseif name == "Caino" then
-        name = "Canio"
-    end
-
     if card.facing and card.facing =='back' then
         name = "?"
     else
+        name = card.ability.name
+
+        if name == "Riff-raff" then
+            name = "Riff-Raff"
+        elseif name == "Caino" then
+            name = "Canio"
+        end
+
         local stickers = get_card_stickers(card)
 
         if stickers and next(stickers) then
@@ -107,7 +96,37 @@ function encode_card(card)
             data.e = edition
         end
 
-        desc_args = card:get_description_table(is_modded)
+        if (card:is_modded()) then
+            -- modded
+            data.m = 1
+
+            local localization_set = G.localization.descriptions[card.ability.set]
+            if localization_set and card.config.center_key then
+                local localization_desc = localization_set[card.config.center_key]
+                if localization_desc and localization_desc.name then
+                    name = localization_desc.name
+                end
+            end
+
+            if card.ability.set == "Joker" and card.config.center.rarity then
+                local rarity = card.config.center.rarity
+
+                local card_types = {"Common", "Uncommon", "Rare", "Legendary"}
+                if (card_types[rarity]) then
+                    data.r = card_types[rarity]
+                else
+                    local localized_rarity = localize("k_" .. rarity:lower())
+                    if (localized_rarity ~= 'ERROR') then
+                        data.r = localized_rarity
+                    end
+                end
+            end
+            -- description
+            data.d = card:get_description_table(true)
+        else
+            -- description
+            data.d = card:get_description_table(false)
+        end
     end
 
     -- name
@@ -121,28 +140,6 @@ function encode_card(card)
     -- popup direction
     data.p = card:get_popup_direction()
 
-    -- description
-    data.d = desc_args
-
-    -- modded
-    if (is_modded) then
-        data.m = 1
-
-        if card.ability.set == "Joker" and card.config.center.rarity then
-            local rarity = card.config.center.rarity
-
-            local card_types = {"Common", "Uncommon", "Rare", "Legendary"}
-            if (card_types[rarity]) then
-                data.r = card_types[rarity]
-            else
-                local localized_rarity = localize("k_" .. rarity:lower())
-                if (localized_rarity ~= 'ERROR') then
-                    data.r = localized_rarity
-                end
-            end
-        end
-    end
-
     return data
 end
 
@@ -153,25 +150,25 @@ end
 function get_run_info()
     local run_info = {}
     local possible_hands = {
-        "Flush Five",
-        "Flush House",
-        "Five of a Kind",
-        "Straight Flush",
-        "Four of a Kind",
-        "Full House",
-        "Flush",
-        "Straight",
-        "Three of a Kind",
-        "Two Pair",
+        "High Card",
         "Pair",
-        "High Card"
+        "Two Pair",
+        "Three of a Kind",
+        "Straight",
+        "Flush",
+        "Full House",
+        "Four of a Kind",
+        "Straight Flush",
+        "Five of a Kind",
+        "Flush House",
+        "Flush Five"
     }
 
     run_info.h = {}
 
     for index, handname in ipairs(possible_hands) do
         local hand = G.GAME.hands[handname]
-        if hand then
+        if hand and hand.visible then
             run_info.h[index] = {
                 ["l"] = hand.level,
                 ["c"] = hand.chips,
