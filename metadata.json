@@ -6,6 +6,6 @@
 	"prefix": "stj",
 	"main_file": "steamodded.lua",
 	"priority": 0,
-	"version": "0.1.3a",
+	"version": "0.2",
 	"dependencies": []
 }
