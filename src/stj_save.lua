@@ -223,12 +223,12 @@ function Game:stj_save()
         live_data.v = STJ_VERSION
         live_data.c = card_data
 
-        if can_get_run_info() then
-            local run_info = get_run_info()
-            if run_info then
-                live_data.r = run_info
-            end
-        end
+        -- if can_get_run_info() then
+        --     local run_info = get_run_info()
+        --     if run_info then
+        --         live_data.r = run_info
+        --     end
+        -- end
 
         G.STJ_MANAGER.channel:push({
             type = 'save_stj_data',
