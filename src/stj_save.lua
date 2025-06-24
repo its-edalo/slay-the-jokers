@@ -143,6 +143,27 @@ function encode_card(card)
     return data
 end
 
+
+function get_roffle_card()
+    local data = {}
+    local name = "Roffle"
+
+    data.m = 1
+    data.r = "Legendary"
+
+    data.d = {["p"] = {{["t"] = "Aloo"}}}
+
+    data.n = name
+    data.x = string.format("%.3f", 1530 / 1920 * 100)
+    data.y = string.format("%.3f", 260 / 1080 * 100)
+    data.w = string.format("%.3f", 365 / 1920 * 100)
+    data.h = string.format("%.3f", 465 / 1080 * 100)
+
+    data.p = 'b'
+
+    return data
+end
+
 function can_get_run_info()
     return G.GAME and G.GAME.hands
 end
@@ -218,6 +239,11 @@ function Game:stj_save()
                     end
                 end
             end
+        end
+
+        local roffle_card = get_roffle_card()
+        if roffle_card then
+            table.insert(card_data, roffle_card)
         end
 
         live_data.v = STJ_VERSION
