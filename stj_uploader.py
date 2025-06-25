@@ -1,3 +1,4 @@
+import re
 import os
 import json
 import time
@@ -7,6 +8,14 @@ import threading
 import collections
 from io import BytesIO
 from datetime import datetime
+
+# Set to False to disable Jokers Slay Back functionality
+JOKERS_SLAY_BACK_ENABLED = True
+# Change these to your desired shop text
+DEFAULT_SHOP_TEXT = "Improve your run!"
+SUB_SHOP_TEXT = "Thank you, {username}"
+# You can find your streamer ID at `https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/`
+streamer_id = "your_streamer_id_here"
 
 # Change this to your estimated stream delay in seconds
 # Adjust by multiples of 0.1
@@ -21,6 +30,7 @@ UPLOAD_KEY_FILENAME = "upload.key"
 UPLOAD_KEY_PATH = os.path.join(BALATRO_PATH, UPLOAD_KEY_FILENAME)
 UPLOAD_KEY_LEGACY_PATH = os.path.join(os.path.dirname(__file__), UPLOAD_KEY_FILENAME)
 LIVE_DATA_FILE_PATH = os.path.join(BALATRO_PATH, "stj-live-data.json")
+SHOP_TEXT_FILE_PATH = os.path.join(BALATRO_PATH, "shop_text.txt")
 REMOTE_LIVE_DATA_FILE_NAME = "live-data.json"
 UPLOAD_URL = "https://edalo.net/stj/upload"
 UPLOAD_INTERVAL = 0.9
@@ -109,6 +119,36 @@ def uploader_thread(upload_key):
     print("Slay the Jokers: Uploader thread exiting...", flush=True)
     return
 
+def process_jokers_slay_back_data():
+    try:
+        if streamer_id == "your_streamer_id_here":
+            return DEFAULT_SHOP_TEXT
+
+        response = requests.get(f"https://edalo.net/jsb/streamers/{streamer_id}/shop_text.txt", timeout=5)
+        if response.status_code != 200:
+            print(f"Jokers Slay Back Warning: Failed to fetch data: Received status code {response.status_code}")
+            return DEFAULT_SHOP_TEXT
+
+        username = response.text.strip()
+        if not re.fullmatch(r"[a-zA-Z0-9_]{4,25}", username):
+            print(f"Jokers Slay Back Warning: Suspicious username detected: '{username}'")
+            return DEFAULT_SHOP_TEXT
+
+        content = SUB_SHOP_TEXT.format(username=username)
+        return content
+
+    except requests.exceptions.RequestException:
+        print(f"Jokers Slay Back Warning: Failed to fetch data")
+        return DEFAULT_SHOP_TEXT
+
+def save_jokers_slay_back_data():
+    if JOKERS_SLAY_BACK_ENABLED:
+        content = process_jokers_slay_back_data()
+    else:
+        content = DEFAULT_SHOP_TEXT
+    with open(SHOP_TEXT_FILE_PATH, 'w', encoding='utf-8') as f:
+        f.write(content)
+
 def main():
     if UPLOAD_INTERVAL * MAX_UPLOAD_QUEUE_SIZE <= UPLOAD_DELAY:
         print("Slay the Jokers Error: Chosen upload delay is too high")
@@ -136,6 +176,7 @@ def main():
         if not is_game_running():
             print("Game closed. Slay the Jokers is exiting...")
             break
+        save_jokers_slay_back_data()
         time.sleep(1)
 
     return

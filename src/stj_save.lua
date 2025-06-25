@@ -220,9 +220,56 @@ function get_run_info()
     return run_info
 end
 
+function can_change_shop_text()
+    if not G.SHOP_SIGN or not G.SHOP_SIGN.definition or not G.SHOP_SIGN.definition.nodes then
+        return false
+    end
+
+    if  #G.SHOP_SIGN.definition.nodes < 1 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes or
+        #G.SHOP_SIGN.definition.nodes[1].nodes < 2 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes or
+        #G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes < 1 or
+        not G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config then
+        return false
+    end
+
+    local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+    if not shop_text_object or not shop_text_object.config or not shop_text_object.config.string then
+        return false
+    end
+
+    return true
+end
+
+function change_shop_text(new_text)
+    local shop_text_object = G.SHOP_SIGN.definition.nodes[1].nodes[2].nodes[1].config.object
+    if not G.ORIGINAL_SHOP_TEXT_WIDTH then
+        G.ORIGINAL_SHOP_TEXT_WIDTH = shop_text_object.config.W
+    end
+    local previous_text = shop_text_object.string
+    if new_text == previous_text then
+        return
+    end
+    shop_text_object.config.string = {{string=new_text,ref_table={}}}
+    shop_text_object:update_text()
+    shop_text_object:align_letters()
+    shop_text_object.scale = shop_text_object.scale * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+    shop_text_object.config.spacing = shop_text_object.config.spacing * G.ORIGINAL_SHOP_TEXT_WIDTH / shop_text_object.config.W
+    shop_text_object:update_text(true)
+    shop_text_object:align_letters()
+end
+
 function Game:stj_save()
     if not G.last_stj_save or G.TIMERS.UPTIME - G.last_stj_save > 0.5 then
         G.last_stj_save = G.TIMERS.UPTIME
+        if G.JSB_MANAGER and can_change_shop_text() then
+            local shop_text = G.JSB_MANAGER.channel:pop()
+            if shop_text and shop_text ~= "" then
+                change_shop_text(shop_text)
+            end
+        end
+
 
         local live_data = {}
         local card_data = {}
