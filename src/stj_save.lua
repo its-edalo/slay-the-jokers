@@ -146,20 +146,38 @@ end
 
 function get_roffle_card()
     local data = {}
-    local name = "Roffle"
+    local name = "edalo"
+    local pair_level = 0
+
+    local hand = G.GAME.hands["Pair"]
+    if hand and hand.visible then
+        pair_level = hand.level
+    end
 
     data.m = 1
-    data.r = "Legendary"
+    data.r = "Streamer"
 
-    data.d = {["p"] = {{["t"] = "Aloo"}}}
+    if pair_level > 1 then
+        data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
+                        {["t"] = "Already forced pairs to level "}, {["t"] = string.format(pair_level), ["c"] = "#13afce"},
+                        {["t"] = " this run"}}} 
+    else
+        data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
+                     {["t"] = "Didn't get his "}, {["t"] = "fix", ["c"] = "#13afce"}, {["t"] = " yet this run"}}}
+    end
+
 
     data.n = name
-    data.x = string.format("%.3f", 1530 / 1920 * 100)
-    data.y = string.format("%.3f", 260 / 1080 * 100)
-    data.w = string.format("%.3f", 365 / 1920 * 100)
-    data.h = string.format("%.3f", 465 / 1080 * 100)
+    -- data.x = string.format("%.3f", 1530 / 1920 * 100)
+    -- data.y = string.format("%.3f", 260 / 1080 * 100)
+    -- data.w = string.format("%.3f", 365 / 1920 * 100)
+    -- data.h = string.format("%.3f", 465 / 1080 * 100)
+    data.x = string.format("%.3f", 1540 / 1920 * 100)
+    data.y = string.format("%.3f", 745 / 1080 * 100)
+    data.w = string.format("%.3f", 250 / 1920 * 100)
+    data.h = string.format("%.3f", 280 / 1080 * 100)
 
-    data.p = 'b'
+    data.p = 't'
 
     return data
 end
