@@ -147,20 +147,24 @@ end
 function get_roffle_card()
     local data = {}
     local name = "edalo"
-    local pair_level = 0
+    local pair_count = 0
 
     local hand = G.GAME.hands["Pair"]
     if hand and hand.visible then
-        pair_level = hand.level
+        pair_count = hand.played
     end
 
     data.m = 1
     data.r = "Streamer"
 
-    if pair_level > 1 then
+    if pair_count == 1 then
         data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
-                        {["t"] = "Already forced pairs to level "}, {["t"] = string.format(pair_level), ["c"] = "#13afce"},
-                        {["t"] = " this run"}}} 
+                        {["t"] = "Already forced pairs "}, {["t"] = string.format(pair_count), ["c"] = "#13afce"},
+                        {["t"] = " time this run"}}}
+    elseif pair_count > 0 then
+        data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
+                        {["t"] = "Already forced pairs "}, {["t"] = string.format(pair_count), ["c"] = "#13afce"},
+                        {["t"] = " times this run"}}}
     else
         data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
                      {["t"] = "Didn't get his "}, {["t"] = "fix", ["c"] = "#13afce"}, {["t"] = " yet this run"}}}
