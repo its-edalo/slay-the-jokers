@@ -167,7 +167,7 @@ function get_roffle_card()
                         {["t"] = " times this run"}}}
     else
         data.d = {["p"] = {{["t"] = "Pair", ["c"] = "#ff9a00"}, {["t"] = " addict"}, {["n"] = 1},
-                     {["t"] = "Didn't get his "}, {["t"] = "fix", ["c"] = "#13afce"}, {["t"] = " yet this run"}}}
+                     {["t"] = "Didn't play any pairs this run so far"}}}
     end
 
 
