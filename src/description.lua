@@ -303,7 +303,7 @@ function Card:get_text_parts(main_table)
                 end
             end
 
-            if parsed_part then
+            if parsed_part and parsed_part["t"] and type(parsed_part["t"]) == 'string' then
                 if bg then
                     parsed_part["b"] = bg
                 end
