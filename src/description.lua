@@ -278,40 +278,42 @@ function Card:get_text_parts(main_table)
     local parts_table = {}
     local line_count = #main_table
     for i, line in pairs(main_table) do
-        for _, part in pairs(line) do
-            -- Note - The lovely DLL itself changes `localize`! Don't rely on the source code alone.
-            local parsed_part = nil
-            local bg = nil
-            if part.config then
-                if part.config.text then
-                    parsed_part = {["t"] = part.config.text, ["c"] = colourToJson(part.config.colour)}
-                elseif part.config.colour then
-                    bg = colourToJson(part.config.colour)
-                end
-            end
-            if not parsed_part and part.nodes and #part.nodes > 0 and part.nodes[1].config then
-                local node_config = part.nodes[1].config
-                if node_config.text then
-                    parsed_part = {["t"] = node_config.text, ["c"] = colourToJson(node_config.colour)}
-                elseif node_config.object and node_config.object.string then
-                    parsed_part = {["t"] = node_config.object.string}
-
-                    local colours = node_config.object.colours
-                    if colours and #colours > 0 then
-                        parsed_part["c"] = colourToJson(colours[1])
+        if line and type(line) == 'table' then
+            for _, part in pairs(line) do
+                -- Note - The lovely DLL itself changes `localize`! Don't rely on the source code alone.
+                local parsed_part = nil
+                local bg = nil
+                if part.config then
+                    if part.config.text then
+                        parsed_part = {["t"] = part.config.text, ["c"] = colourToJson(part.config.colour)}
+                    elseif part.config.colour then
+                        bg = colourToJson(part.config.colour)
                     end
                 end
-            end
+                if not parsed_part and part.nodes and #part.nodes > 0 and part.nodes[1].config then
+                    local node_config = part.nodes[1].config
+                    if node_config.text then
+                        parsed_part = {["t"] = node_config.text, ["c"] = colourToJson(node_config.colour)}
+                    elseif node_config.object and node_config.object.string then
+                        parsed_part = {["t"] = node_config.object.string}
 
-            if parsed_part and parsed_part["t"] and type(parsed_part["t"]) == 'string' then
-                if bg then
-                    parsed_part["b"] = bg
+                        local colours = node_config.object.colours
+                        if colours and #colours > 0 then
+                            parsed_part["c"] = colourToJson(colours[1])
+                        end
+                    end
                 end
-                table.insert(parts_table, parsed_part)
+
+                if parsed_part and parsed_part["t"] and type(parsed_part["t"]) == 'string' then
+                    if bg then
+                        parsed_part["b"] = bg
+                    end
+                    table.insert(parts_table, parsed_part)
+                end
             end
-        end
-        if i < line_count then
-            table.insert(parts_table, {["n"] = 1})
+            if i < line_count then
+                table.insert(parts_table, {["n"] = 1})
+            end
         end
     end
     return parts_table
