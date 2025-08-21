@@ -24,7 +24,7 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 ## Things to Know Before Installing
 
 - **Upload Key**: To use this mod, you'll need an upload key to the Slay the Jokers server.
-    - You can get one using the automated system at https://edalo.net (you will need to verify your Twitch account to prove it's really you).
+    - You can get one using the automated system at https://edalo.net/stj (you will need to verify your Twitch account to prove it's really you).
     - If something goes wrong or you prefer not to authorize, you can request a key at `itsedalo@gmail.com`.
         - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`
 
