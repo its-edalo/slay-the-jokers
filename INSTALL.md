@@ -86,6 +86,16 @@ Before installing any mod, it's always smart to back up your game data.
 
 - After setup completes, the black command window should periodically print messages indicating that data is being uploaded.
 
+## Linux / Proton (Experimental)
+
+See README.md for overview.
+
+1. Comment out Windows launcher in `lovely.toml` (see above).
+2. Ensure `stj_launch_uploader.sh` is executable.
+3. Set Steam launch options as shown in README.
+4. First launch: wait for downloads/setup (one-time).
+5. Uploader auto-starts, detects game via cmdline, uploads data.
+
 **Done!**
 
 You should now see the cards' positions on your stream overlay when you enable the extension on your Twitch channel ([here](https://dashboard.twitch.tv/extensions/iaofk5k6d87u31z9uy2joje2fwn347)), after you refresh the browser tab. Enjoy streaming!
