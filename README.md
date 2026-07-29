@@ -15,7 +15,7 @@ Does not require `steamodded`.
 
 ---
 
-If you need help, have suggestions, or need an upload key, feel free to contact me at `itsedalo@gmail.com`.
+If you need help or have suggestions, feel free to contact me at `itsedalo@gmail.com`.
 
 ## Installation
 
@@ -25,8 +25,6 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 
 - **Upload Key**: To use this mod, you'll need an upload key to the Slay the Jokers server.
     - You can get one using the automated system at https://edalo.net/stj (you will need to verify your Twitch account to prove it's really you).
-    - If something goes wrong or you prefer not to authorize, you can request a key at `itsedalo@gmail.com`.
-        - Absolutely no need for anything formal or polite, you can just say `Hi, I'm <twitch name>, give me a key`
 
 - **Windows and Steam only**: This mod supports only the **Steam** version of the game on **Windows**.
     - The Xbox Game Pass PC version is not supported as it is incompatible with the required `Lovely` injector.
@@ -34,11 +32,12 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 - **Stream Overlays**: This mod currently only works correctly if the game is shown at a 16:9 resolution (like 1920x1080 / 4K / 8K) and **fills the entire visible area of the stream**. Overlays that crop or reposition the game may cause card positions to misalign.
     - If that's a dealbreaker, feel free to contact me - I might be able to make it work for your setup.
 
-- **Other Mods & Compatibility**: This mod is **compatible** with almost all other mods.
+- **Other Mods & Compatibility**: This mod is compatible with most simple mods.
     - Mods that **modify existing** card effects are **not** compatible (the original card's effect will be shown instead).
+    - Mods that heavily alter game mechanics, card types, or interactable areas might cause crashes.
 
 
-- **Disclaimer**: This mod is still under development, so some features might not work perfectly. If you encounter any issues, please let me know!
+- **Disclaimer**: Some features might not work perfectly. If you encounter any issues, please let me know!
     - *More formal disclaimer for meanies: this project is a hobby project, provided as-is, with no guarantees of stability, correctness, or suitability for any purpose. You're welcome to use it - but I take no responsibility if something goes wrong.*
 
 ## Acknowledgments
@@ -46,7 +45,6 @@ The installation guide can be found [`here`](INSTALL.md). Be sure to **read the 
 Big Thank Yous to all the following people:
 
 - [@tusharsadhwani](https://github.com/tusharsadhwani) for the suggestion and implementation of the `uv` package manager usage
-- [@yotka2](https://github.com/yotka2) for helping with the server setup and maintenance
 - [@espav](https://twitch.tv/espav) for being the extension's first tester and providing invaluable feedback
 - [@edzy](https://twitch.tv/edzyttv) for helping debug the mod and lending his face to the extension's cover image
 - [@Boop Dog](https://github.com/goBoopADog) for creating the mod's Balatro Mod Index page
